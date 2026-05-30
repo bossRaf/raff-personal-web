@@ -1,0 +1,162 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { createClient } from "@/lib/supabase/client";
+import { Star } from "lucide-react";
+import { TestimonialModal } from "@/components/testimonial-modal";
+
+interface Testimonial {
+  id: number;
+  name: string;
+  role: string;
+  company: string;
+  message: string;
+  rating: number;
+}
+
+export default function TestimonialsPage() {
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase
+      .from("testimonials")
+      .select("*")
+      .eq("approved", true)
+      .order("created_at", { ascending: false })
+      .then(({ data }) => {
+        if (data) setTestimonials(data as Testimonial[]);
+      });
+  }, []);
+
+  return (
+    <section className="min-h-[calc(100vh-4rem)] px-4 py-16">
+      <TestimonialModal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+      />
+      <div className="max-w-6xl mx-auto w-full">
+        {/* Header */}
+        <div className="mb-10">
+          <div
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-sm mb-6"
+            style={{
+              borderColor: "oklch(74.6% 0.16 232.661)",
+              color: "oklch(50% 0.18 232)",
+            }}
+          >
+            <span className="relative flex h-2 w-2">
+              <span
+                className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
+                style={{ backgroundColor: "#00ffd5" }}
+              />
+              <span
+                className="relative inline-flex rounded-full h-2 w-2"
+                style={{ backgroundColor: "#00ffd5" }}
+              />
+            </span>
+            Social Proof
+          </div>
+          <h1 className="text-4xl font-bold text-foreground">Testimonials</h1>
+          <p className="text-muted-foreground mt-2">
+            What clients and collaborators say. All testimonials are manually
+            approved.
+          </p>
+        </div>
+
+        {/* Testimonials grid */}
+        {testimonials.length === 0 ? (
+          <div className="text-center py-20 text-muted-foreground">
+            No testimonials yet. Be the first to leave one!
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {testimonials.map((t) => (
+              <div
+                key={t.id}
+                className="rounded-2xl border p-6 space-y-4 transition-all hover:-translate-y-1"
+                style={{
+                  backgroundColor: "var(--card)",
+                  borderColor: "var(--border)",
+                }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.borderColor = "oklch(60% 0.18 232)")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.borderColor = "var(--border)")
+                }
+              >
+                {/* Stars */}
+                <div className="flex items-center gap-1">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star
+                      key={i}
+                      className="h-4 w-4"
+                      style={{
+                        fill:
+                          i < t.rating ? "oklch(80% 0.18 85)" : "transparent",
+                        color:
+                          i < t.rating ? "oklch(80% 0.18 85)" : "var(--border)",
+                      }}
+                    />
+                  ))}
+                </div>
+
+                {/* Message */}
+                <p className="text-sm text-muted-foreground leading-relaxed italic">
+                  "{t.message}"
+                </p>
+
+                {/* Author */}
+                <div
+                  className="flex items-center gap-3 pt-2 border-t"
+                  style={{ borderColor: "var(--border)" }}
+                >
+                  <div
+                    className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold text-white shrink-0"
+                    style={{ backgroundColor: "oklch(60% 0.18 232)" }}
+                  >
+                    {t.name
+                      .split(" ")
+                      .map((n) => n[0])
+                      .join("")
+                      .slice(0, 2)}
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-foreground">
+                      {t.name}
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      {t.role}
+                      {t.company ? ` · ${t.company}` : ""}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Submit CTA */}
+        <div
+          className="mt-16 rounded-2xl border-2 border-dashed p-10 text-center space-y-4"
+          style={{ borderColor: "oklch(74.6% 0.16 232.661)" }}
+        >
+          <h3 className="text-xl font-bold text-foreground">Worked with me?</h3>
+          <p className="text-muted-foreground text-sm">
+            I'd love to hear your feedback. All testimonials are reviewed before
+            publishing.
+          </p>
+          <button
+            onClick={() => setModalOpen(true)}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium text-white transition-all hover:-translate-y-0.5"
+            style={{ background: "oklch(60% 0.18 232)" }}
+          >
+            Leave a Testimonial
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
