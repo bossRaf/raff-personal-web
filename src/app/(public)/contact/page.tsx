@@ -1,15 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { createClient } from "@/lib/supabase/client";
 import { Mail, MapPin, Clock, Send } from "lucide-react";
 import { FaGithub, FaFacebook } from "react-icons/fa";
-import { z } from "zod";
-
-const contactSchema = z.object({
-  email: z.string().email("Please enter a valid email address."),
-  message: z.string().min(10, "Message must be at least 10 characters."),
-});
 
 export default function ContactPage() {
   const [email, setEmail] = useState("");
@@ -23,21 +16,16 @@ export default function ContactPage() {
     setLoading(true);
     setError("");
 
-    const result = contactSchema.safeParse({ email, message });
-    if (!result.success) {
-      setError(result.error.issues[0].message);
-      setLoading(false);
-      return;
-    }
-
-    const supabase = createClient();
-    const { error } = await supabase.from("messages").insert({
-      email,
-      message,
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, message }),
     });
 
-    if (error) {
-      setError("Something went wrong. Please try again.");
+    const data = await res.json();
+
+    if (!res.ok) {
+      setError(data.error || "Something went wrong.");
       setLoading(false);
       return;
     }

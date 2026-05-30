@@ -1,3 +1,8 @@
+"use client";
+
+import { useEffect } from "react";
+import { useTheme } from "next-themes";
+import { createClient } from "@/lib/supabase/client";
 import { AdminSidebar } from "@/components/admin/sidebar";
 
 export default function AdminLayout({
@@ -5,6 +10,19 @@ export default function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const { setTheme } = useTheme();
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase
+      .from("settings")
+      .select("default_theme")
+      .single()
+      .then(({ data }) => {
+        if (data?.default_theme) setTheme(data.default_theme);
+      });
+  }, []);
+
   return (
     <div className="flex min-h-screen">
       <AdminSidebar />

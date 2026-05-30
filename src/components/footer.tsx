@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FaGithub } from "react-icons/fa";
+import { FaGithub, FaFacebook } from "react-icons/fa";
 import { Mail } from "lucide-react";
 import { useState } from "react";
 import { LoginModal } from "@/components/login-modal";
@@ -32,10 +32,11 @@ export function Footer() {
                 </Link>
 
                 <Link
-                  href="mailto:raffsimplified@gmail.com"
+                  href="https://www.facebook.com/raffSimplified"
+                  target="_blank"
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  <Mail className="h-4 w-4" />
+                  <FaFacebook className="h-4 w-4" />
                 </Link>
               </div>
             </div>
