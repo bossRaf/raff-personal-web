@@ -62,10 +62,9 @@ export default function AdminProjectsPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-foreground">Projects</h1>
-          <p className="text-sm text-muted-foreground mt-1">
-            Manage your portfolio projects.
-          </p>
+          <h1 className="text-2xl font-bold text-foreground">
+            Manage your portfolio projects
+          </h1>
         </div>
 
         <a
