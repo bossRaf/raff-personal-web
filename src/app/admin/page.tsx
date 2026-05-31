@@ -120,9 +120,9 @@ export default function AdminDashboard() {
     <div className="space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-foreground">
+        <h4 className="text-xl font-bold text-foreground">
           Welcome back. Here's what's happening
-        </h1>
+        </h4>
       </div>
 
       {/* Stats cards */}

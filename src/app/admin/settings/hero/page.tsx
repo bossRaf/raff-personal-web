@@ -71,14 +71,10 @@ export default function HeroSettingsPage() {
         <button
           onClick={() => router.back()}
           className="p-2 rounded-lg hover:bg-accent transition-colors"
+          style={{ backgroundColor: "oklch(60% 0.18 232 / 0.15)" }}
         >
           <ArrowLeft className="h-4 w-4 text-muted-foreground" />
         </button>
-        <div>
-          <h1 className="text-2xl font-bold text-foreground">
-            Edit your homepage headline and CTA
-          </h1>
-        </div>
       </div>
 
       {/* Form */}
@@ -159,8 +155,8 @@ export default function HeroSettingsPage() {
         <button
           onClick={handleSave}
           disabled={saving}
-          className="inline-flex items-center gap-2 px-5 py-2 rounded-xl text-sm font-medium text-white transition-all disabled:opacity-50 hover:-translate-y-0.5"
-          style={{ background: "oklch(60% 0.18 232)" }}
+          className="inline-flex items-center gap-2 px-5 py-2 rounded-xl text-sm font-medium text-black transition-all disabled:opacity-50 hover:-translate-y-0.5"
+          style={{ backgroundColor: "oklch(60% 0.18 232 / 0.15)" }}
         >
           <Save className="h-4 w-4" />
           {saving ? "Saving..." : "Save Hero"}

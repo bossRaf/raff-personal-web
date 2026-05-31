@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { Plus, Pencil, Trash2, X, Check } from "lucide-react";
+import { Plus, Pencil, Trash2, X } from "lucide-react";
+import { ConfirmDeleteModal } from "@/components/admin/confirm-delete-modal";
 
 interface Skill {
   id: number;
@@ -29,6 +30,10 @@ export default function AdminSkillsPage() {
   const [form, setForm] = useState(emptyForm);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
+  const [deleteModal, setDeleteModal] = useState<{
+    open: boolean;
+    id: number | null;
+  }>({ open: false, id: null });
 
   useEffect(() => {
     fetchSkills();
@@ -102,10 +107,15 @@ export default function AdminSkillsPage() {
     fetchSkills();
   }
 
-  async function deleteSkill(id: number) {
-    if (!confirm("Delete this skill?")) return;
+  function openDeleteModal(id: number) {
+    setDeleteModal({ open: true, id });
+  }
+
+  async function handleDelete() {
+    if (!deleteModal.id) return;
     const supabase = createClient();
-    await supabase.from("skills").delete().eq("id", id);
+    await supabase.from("skills").delete().eq("id", deleteModal.id);
+    setDeleteModal({ open: false, id: null });
     fetchSkills();
   }
 
@@ -125,234 +135,244 @@ export default function AdminSkillsPage() {
   );
 
   return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-foreground">
-            Manage your tech stack and skill categories
-          </h1>
-        </div>
-        <button
-          onClick={openAdd}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-white transition-all hover:-translate-y-0.5"
-          style={{ background: "oklch(60% 0.18 232)" }}
-        >
-          <Plus className="h-4 w-4" />
-          Add Skill
-        </button>
-      </div>
+    <>
+      <ConfirmDeleteModal
+        isOpen={deleteModal.open}
+        message="Are you sure you want to delete this skill? This action cannot be undone."
+        onConfirm={handleDelete}
+        onCancel={() => setDeleteModal({ open: false, id: null })}
+      />
+      <div className="space-y-6">{/* rest of content */}</div>
 
-      {/* Inline form */}
-      {showForm && (
-        <div
-          className="rounded-2xl border p-6 space-y-4"
-          style={{ backgroundColor: "var(--card)" }}
-        >
-          <div className="flex items-center justify-between">
-            <h2 className="font-semibold text-foreground">
-              {editingId ? "Edit Skill" : "Add Skill"}
-            </h2>
-            <button
-              onClick={closeForm}
-              className="text-muted-foreground hover:text-foreground"
-            >
-              <X className="h-4 w-4" />
-            </button>
+      <div className="space-y-6">
+        {/* Header */}
+        <div className="flex items-center justify-between">
+          <div>
+            <h4 className="text-xl font-bold text-foreground">
+              Manage your tech stack and skill categories
+            </h4>
           </div>
-
-          {error && (
-            <div
-              className="px-4 py-3 rounded-lg text-sm border"
-              style={{
-                backgroundColor: "oklch(95% 0.05 27)",
-                borderColor: "oklch(80% 0.1 27)",
-                color: "oklch(40% 0.15 27)",
-              }}
-            >
-              {error}
-            </div>
-          )}
-
-          <form
-            onSubmit={handleSubmit}
-            className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+          <button
+            onClick={openAdd}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-white transition-all hover:-translate-y-0.5"
+            style={{ background: "oklch(60% 0.18 232)" }}
           >
-            <div className="space-y-1">
-              <label className="text-sm font-medium text-foreground">
-                Name
-              </label>
-              <input
-                type="text"
-                value={form.name}
-                onChange={(e) =>
-                  setForm((f) => ({ ...f, name: e.target.value }))
-                }
-                required
-                placeholder="e.g. Next.js"
-                className={inputClass}
-                style={inputStyle}
-              />
-            </div>
+            <Plus className="h-4 w-4" />
+            Add Skill
+          </button>
+        </div>
 
-            <div className="space-y-1">
-              <label className="text-sm font-medium text-foreground">
-                Category
-              </label>
-              <select
-                value={form.category}
-                onChange={(e) =>
-                  setForm((f) => ({
-                    ...f,
-                    category: e.target.value as typeof form.category,
-                  }))
-                }
-                className={inputClass}
-                style={inputStyle}
-              >
-                {categories.map((c) => (
-                  <option key={c} value={c} className="capitalize">
-                    {c}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="space-y-1">
-              <label className="text-sm font-medium text-foreground">
-                Icon (emoji)
-              </label>
-              <input
-                type="text"
-                value={form.icon}
-                onChange={(e) =>
-                  setForm((f) => ({ ...f, icon: e.target.value }))
-                }
-                placeholder="e.g. ⚡"
-                className={inputClass}
-                style={inputStyle}
-              />
-            </div>
-
-            <div className="space-y-1">
-              <label className="text-sm font-medium text-foreground">
-                Display Order
-              </label>
-              <input
-                type="number"
-                value={form.display_order}
-                onChange={(e) =>
-                  setForm((f) => ({
-                    ...f,
-                    display_order: parseInt(e.target.value),
-                  }))
-                }
-                className={inputClass}
-                style={inputStyle}
-              />
-            </div>
-
-            <div className="sm:col-span-2 flex gap-3">
+        {/* Inline form */}
+        {showForm && (
+          <div
+            className="rounded-2xl border p-6 space-y-4"
+            style={{ backgroundColor: "var(--card)" }}
+          >
+            <div className="flex items-center justify-between">
+              <h2 className="font-semibold text-foreground">
+                {editingId ? "Edit Skill" : "Add Skill"}
+              </h2>
               <button
-                type="submit"
-                disabled={saving}
-                className="px-5 py-2 rounded-xl text-sm font-medium text-white disabled:opacity-50 transition-all hover:-translate-y-0.5"
-                style={{ background: "oklch(60% 0.18 232)" }}
-              >
-                {saving
-                  ? "Saving..."
-                  : editingId
-                    ? "Update Skill"
-                    : "Add Skill"}
-              </button>
-              <button
-                type="button"
                 onClick={closeForm}
-                className="px-5 py-2 rounded-xl text-sm font-medium border text-foreground transition-all hover:-translate-y-0.5"
-                style={{ borderColor: "var(--border)" }}
+                className="text-muted-foreground hover:text-foreground"
               >
-                Cancel
+                <X className="h-4 w-4" />
               </button>
             </div>
-          </form>
-        </div>
-      )}
 
-      {/* Skills grouped by category */}
-      {loading ? (
-        <div className="text-center py-10 text-sm text-muted-foreground">
-          Loading...
-        </div>
-      ) : skills.length === 0 ? (
-        <div className="text-center py-10 text-sm text-muted-foreground">
-          No skills yet. Add your first skill.
-        </div>
-      ) : (
-        <div className="space-y-6">
-          {categories.map(
-            (cat) =>
-              grouped[cat].length > 0 && (
-                <div
-                  key={cat}
-                  className="rounded-2xl border overflow-hidden"
-                  style={{ backgroundColor: "var(--card)" }}
+            {error && (
+              <div
+                className="px-4 py-3 rounded-lg text-sm border"
+                style={{
+                  backgroundColor: "oklch(95% 0.05 27)",
+                  borderColor: "oklch(80% 0.1 27)",
+                  color: "oklch(40% 0.15 27)",
+                }}
+              >
+                {error}
+              </div>
+            )}
+
+            <form
+              onSubmit={handleSubmit}
+              className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+            >
+              <div className="space-y-1">
+                <label className="text-sm font-medium text-foreground">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  value={form.name}
+                  onChange={(e) =>
+                    setForm((f) => ({ ...f, name: e.target.value }))
+                  }
+                  required
+                  placeholder="e.g. Next.js"
+                  className={inputClass}
+                  style={inputStyle}
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-sm font-medium text-foreground">
+                  Category
+                </label>
+                <select
+                  value={form.category}
+                  onChange={(e) =>
+                    setForm((f) => ({
+                      ...f,
+                      category: e.target.value as typeof form.category,
+                    }))
+                  }
+                  className={inputClass}
+                  style={inputStyle}
                 >
+                  {categories.map((c) => (
+                    <option key={c} value={c} className="capitalize">
+                      {c}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-sm font-medium text-foreground">
+                  Icon (emoji)
+                </label>
+                <input
+                  type="text"
+                  value={form.icon}
+                  onChange={(e) =>
+                    setForm((f) => ({ ...f, icon: e.target.value }))
+                  }
+                  placeholder="e.g. ⚡"
+                  className={inputClass}
+                  style={inputStyle}
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-sm font-medium text-foreground">
+                  Display Order
+                </label>
+                <input
+                  type="number"
+                  value={form.display_order}
+                  onChange={(e) =>
+                    setForm((f) => ({
+                      ...f,
+                      display_order: parseInt(e.target.value) || 0,
+                    }))
+                  }
+                  className={inputClass}
+                  style={inputStyle}
+                />
+              </div>
+
+              <div className="sm:col-span-2 flex gap-3">
+                <button
+                  type="submit"
+                  disabled={saving}
+                  className="px-5 py-2 rounded-xl text-sm font-medium text-white disabled:opacity-50 transition-all hover:-translate-y-0.5"
+                  style={{ background: "oklch(60% 0.18 232)" }}
+                >
+                  {saving
+                    ? "Saving..."
+                    : editingId
+                      ? "Update Skill"
+                      : "Add Skill"}
+                </button>
+                <button
+                  type="button"
+                  onClick={closeForm}
+                  className="px-5 py-2 rounded-xl text-sm font-medium border text-foreground transition-all hover:-translate-y-0.5"
+                  style={{ borderColor: "var(--border)" }}
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        )}
+
+        {/* Skills grouped by category */}
+        {loading ? (
+          <div className="text-center py-10 text-sm text-muted-foreground">
+            Loading...
+          </div>
+        ) : skills.length === 0 ? (
+          <div className="text-center py-10 text-sm text-muted-foreground">
+            No skills yet. Add your first skill.
+          </div>
+        ) : (
+          <div className="space-y-6">
+            {categories.map(
+              (cat) =>
+                grouped[cat].length > 0 && (
                   <div
-                    className="px-6 py-3 border-b"
-                    style={{ backgroundColor: "var(--background)" }}
+                    key={cat}
+                    className="rounded-2xl border overflow-hidden"
+                    style={{ backgroundColor: "var(--card)" }}
                   >
-                    <h3 className="text-sm font-semibold text-foreground capitalize">
-                      {cat}
-                    </h3>
+                    <div
+                      className="px-6 py-3 border-b"
+                      style={{ backgroundColor: "var(--background)" }}
+                    >
+                      <h3 className="text-sm font-semibold text-foreground capitalize">
+                        {cat}
+                      </h3>
+                    </div>
+                    <table className="w-full text-sm">
+                      <tbody className="divide-y">
+                        {grouped[cat].map((skill) => (
+                          <tr
+                            key={skill.id}
+                            className="hover:bg-accent/30 transition-colors"
+                          >
+                            <td className="px-6 py-3">
+                              <div className="flex items-center gap-3">
+                                {skill.icon && (
+                                  <span className="text-xl">{skill.icon}</span>
+                                )}
+                                <span className="font-medium text-foreground">
+                                  {skill.name}
+                                </span>
+                              </div>
+                            </td>
+                            <td className="px-6 py-3 text-muted-foreground text-xs">
+                              Order: {skill.display_order}
+                            </td>
+                            <td className="px-6 py-3">
+                              <div className="flex items-center justify-end gap-2">
+                                <button
+                                  onClick={() => openEdit(skill)}
+                                  className="p-1.5 rounded-lg hover:bg-accent transition-colors"
+                                >
+                                  <Pencil className="h-4 w-4 text-muted-foreground" />
+                                </button>
+                                <button
+                                  onClick={() => openDeleteModal(skill.id)}
+                                  className="p-1.5 rounded-lg hover:bg-accent transition-colors"
+                                >
+                                  <Trash2
+                                    className="h-4 w-4"
+                                    style={{ color: "oklch(55% 0.18 27)" }}
+                                  />
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
                   </div>
-                  <table className="w-full text-sm">
-                    <tbody className="divide-y">
-                      {grouped[cat].map((skill) => (
-                        <tr
-                          key={skill.id}
-                          className="hover:bg-accent/30 transition-colors"
-                        >
-                          <td className="px-6 py-3">
-                            <div className="flex items-center gap-3">
-                              {skill.icon && (
-                                <span className="text-xl">{skill.icon}</span>
-                              )}
-                              <span className="font-medium text-foreground">
-                                {skill.name}
-                              </span>
-                            </div>
-                          </td>
-                          <td className="px-6 py-3 text-muted-foreground text-xs">
-                            Order: {skill.display_order}
-                          </td>
-                          <td className="px-6 py-3">
-                            <div className="flex items-center justify-end gap-2">
-                              <button
-                                onClick={() => openEdit(skill)}
-                                className="p-1.5 rounded-lg hover:bg-accent transition-colors"
-                              >
-                                <Pencil className="h-4 w-4 text-muted-foreground" />
-                              </button>
-                              <button
-                                onClick={() => deleteSkill(skill.id)}
-                                className="p-1.5 rounded-lg hover:bg-accent transition-colors"
-                              >
-                                <Trash2
-                                  className="h-4 w-4"
-                                  style={{ color: "oklch(55% 0.18 27)" }}
-                                />
-                              </button>
-                            </div>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              ),
-          )}
-        </div>
-      )}
-    </div>
+                ),
+            )}
+          </div>
+        )}
+      </div>
+    </>
   );
 }

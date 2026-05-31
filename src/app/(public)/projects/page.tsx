@@ -85,7 +85,7 @@ export default function ProjectsPage() {
             {filtered.map((project) => (
               <div
                 key={project.id}
-                className="rounded-2xl border overflow-hidden transition-all hover:-translate-y-1 group"
+                className="rounded-2xl border overflow-hidden transition-all hover:-translate-y-1 group relative"
                 style={{
                   backgroundColor: "var(--card)",
                   borderColor: "var(--border)",
@@ -99,15 +99,14 @@ export default function ProjectsPage() {
               >
                 {/* Thumbnail */}
                 <div
-                  className="relative w-full h-48 overflow-hidden"
+                  className="relative w-full h-56 overflow-hidden"
                   style={{ backgroundColor: "oklch(60% 0.18 232 / 0.15)" }}
                 >
                   {project.image ? (
-                    <Image
+                    <img
                       src={project.image}
                       alt={project.title}
-                      fill
-                      className="object-cover"
+                      className="w-full h-full object-cover"
                     />
                   ) : (
                     <div

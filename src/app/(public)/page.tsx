@@ -24,7 +24,7 @@ const terminalLines = [
   {
     prompt: "~",
     command: "supabase status",
-    output: "● API URL: https://hnyhnhiaunpqbusdxgrm.supabase.co",
+    output: "● API URL: https://abcxyz.supabase.co",
   },
 ];
 
@@ -185,8 +185,10 @@ export default function HomePage() {
                 {[
                   "Next.js",
                   "TypeScript",
-                  "Supabase",
                   "Tailwind",
+                  "Shadcn/ui",
+                  "Supabase",
+                  "Resend",
                   "Vercel",
                 ].map((tech) => (
                   <span

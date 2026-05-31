@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { Check, X, Trash2, Star } from "lucide-react";
+// import { ConfirmDeleteModal } from "@/components/admin/confirm-delete-modal";
 
 interface Testimonial {
   id: number;
@@ -19,6 +20,10 @@ export default function AdminTestimonialsPage() {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<"all" | "pending" | "approved">("all");
+  // const [deleteModal, setDeleteModal] = useState<{
+  //   open: boolean;
+  //   id: number | null;
+  // }>({ open: false, id: null });
 
   useEffect(() => {
     fetchTestimonials();
@@ -67,9 +72,9 @@ export default function AdminTestimonialsPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-foreground">
+          <h4 className="text-xl font-bold text-foreground">
             Approve, reject, or delete testimonials
-          </h1>
+          </h4>
         </div>
 
         {/* Filter tabs */}

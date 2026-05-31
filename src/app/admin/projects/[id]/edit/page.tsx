@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { ArrowLeft, Upload } from "lucide-react";
 
@@ -11,13 +11,17 @@ interface Skill {
   category: string;
 }
 
-export default function NewProjectPage() {
+export default function EditProjectPage() {
   const router = useRouter();
+  const params = useParams();
+  const id = params.id as string;
+
   const [skills, setSkills] = useState<Skill[]>([]);
   const [selectedSkills, setSelectedSkills] = useState<number[]>([]);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string>("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
 
   const [form, setForm] = useState({
@@ -32,29 +36,47 @@ export default function NewProjectPage() {
     display_order: 0,
     seo_title: "",
     seo_description: "",
+    image: "",
   });
 
   useEffect(() => {
     const supabase = createClient();
-    supabase
-      .from("skills")
-      .select("*")
-      .order("name")
-      .then(({ data }) => {
-        if (data) setSkills(data as Skill[]);
-      });
-  }, []);
 
-  const handleTitleChange = (title: string) => {
-    setForm((f) => ({
-      ...f,
-      title,
-      slug: title
-        .toLowerCase()
-        .replace(/\s+/g, "-")
-        .replace(/[^a-z0-9-]/g, ""),
-    }));
-  };
+    async function fetchData() {
+      const [projectRes, skillsRes, projectSkillsRes] = await Promise.all([
+        supabase.from("projects").select("*").eq("id", id).single(),
+        supabase.from("skills").select("*").order("name"),
+        supabase.from("project_skills").select("skill_id").eq("project_id", id),
+      ]);
+
+      if (projectRes.data) {
+        const p = projectRes.data;
+        setForm({
+          title: p.title || "",
+          slug: p.slug || "",
+          description: p.description || "",
+          excerpt: p.excerpt || "",
+          github_url: p.github_url || "",
+          live_url: p.live_url || "",
+          featured: p.featured || false,
+          published: p.published || false,
+          display_order: p.display_order || 0,
+          seo_title: p.seo_title || "",
+          seo_description: p.seo_description || "",
+          image: p.image || "",
+        });
+        if (p.image) setImagePreview(p.image);
+      }
+
+      if (skillsRes.data) setSkills(skillsRes.data as Skill[]);
+      if (projectSkillsRes.data)
+        setSelectedSkills(projectSkillsRes.data.map((s) => s.skill_id));
+
+      setLoading(false);
+    }
+
+    fetchData();
+  }, [id]);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -63,19 +85,21 @@ export default function NewProjectPage() {
     setImagePreview(URL.createObjectURL(file));
   };
 
-  const toggleSkill = (id: number) => {
+  const toggleSkill = (skillId: number) => {
     setSelectedSkills((prev) =>
-      prev.includes(id) ? prev.filter((s) => s !== id) : [...prev, id],
+      prev.includes(skillId)
+        ? prev.filter((s) => s !== skillId)
+        : [...prev, skillId],
     );
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
+    setSaving(true);
     setError("");
 
     const supabase = createClient();
-    let imageUrl = "";
+    let imageUrl = form.image;
 
     if (imageFile) {
       const ext = imageFile.name.split(".").pop();
@@ -85,7 +109,7 @@ export default function NewProjectPage() {
         .upload(path, imageFile);
       if (uploadError) {
         setError("Image upload failed.");
-        setLoading(false);
+        setSaving(false);
         return;
       }
       const { data: urlData } = supabase.storage
@@ -94,22 +118,23 @@ export default function NewProjectPage() {
       imageUrl = urlData.publicUrl;
     }
 
-    const { data: project, error: insertError } = await supabase
+    const { error: updateError } = await supabase
       .from("projects")
-      .insert({ ...form, image: imageUrl || null })
-      .select()
-      .single();
+      .update({ ...form, image: imageUrl })
+      .eq("id", id);
 
-    if (insertError) {
-      setError(insertError.message);
-      setLoading(false);
+    if (updateError) {
+      setError(updateError.message);
+      setSaving(false);
       return;
     }
 
+    // Update project skills
+    await supabase.from("project_skills").delete().eq("project_id", id);
     if (selectedSkills.length > 0) {
       await supabase.from("project_skills").insert(
         selectedSkills.map((skill_id) => ({
-          project_id: project.id,
+          project_id: parseInt(id),
           skill_id,
         })),
       );
@@ -125,6 +150,14 @@ export default function NewProjectPage() {
     borderColor: "var(--border)",
   };
 
+  if (loading) {
+    return (
+      <div className="text-center py-20 text-sm text-muted-foreground">
+        Loading...
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6 max-w-3xl">
       {/* Header */}
@@ -133,8 +166,14 @@ export default function NewProjectPage() {
           onClick={() => router.back()}
           className="p-2 rounded-lg hover:bg-accent transition-colors"
         >
-          <ArrowLeft className="h-4 w-10 text-muted-foreground" />
+          <ArrowLeft className="h-4 w-4 text-muted-foreground" />
         </button>
+        <div>
+          <h1 className="text-2xl font-bold text-foreground">Edit Project</h1>
+          <p className="text-sm text-muted-foreground mt-1">
+            Update your portfolio project.
+          </p>
+        </div>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -163,9 +202,10 @@ export default function NewProjectPage() {
             <input
               type="text"
               value={form.title}
-              onChange={(e) => handleTitleChange(e.target.value)}
+              onChange={(e) =>
+                setForm((f) => ({ ...f, title: e.target.value }))
+              }
               required
-              placeholder="My Awesome Project"
               className={inputClass}
               style={inputStyle}
             />
@@ -178,7 +218,6 @@ export default function NewProjectPage() {
               value={form.slug}
               onChange={(e) => setForm((f) => ({ ...f, slug: e.target.value }))}
               required
-              placeholder="my-awesome-project"
               className={inputClass}
               style={inputStyle}
             />
@@ -194,7 +233,6 @@ export default function NewProjectPage() {
               onChange={(e) =>
                 setForm((f) => ({ ...f, excerpt: e.target.value }))
               }
-              placeholder="Short description shown on project cards"
               className={inputClass}
               style={inputStyle}
             />
@@ -210,7 +248,6 @@ export default function NewProjectPage() {
                 setForm((f) => ({ ...f, description: e.target.value }))
               }
               rows={4}
-              placeholder="Full project description"
               className={inputClass}
               style={inputStyle}
             />
@@ -234,7 +271,6 @@ export default function NewProjectPage() {
               onChange={(e) =>
                 setForm((f) => ({ ...f, github_url: e.target.value }))
               }
-              placeholder="https://github.com/username/repo"
               className={inputClass}
               style={inputStyle}
             />
@@ -250,7 +286,6 @@ export default function NewProjectPage() {
               onChange={(e) =>
                 setForm((f) => ({ ...f, live_url: e.target.value }))
               }
-              placeholder="https://myproject.com"
               className={inputClass}
               style={inputStyle}
             />
@@ -264,13 +299,21 @@ export default function NewProjectPage() {
         >
           <h2 className="font-semibold text-foreground">Project Image</h2>
 
+          {imagePreview && (
+            <img
+              src={imagePreview}
+              alt="Preview"
+              className="w-full h-48 object-cover rounded-xl"
+            />
+          )}
+
           <label
             className="flex flex-col items-center justify-center gap-2 border-2 border-dashed rounded-xl p-8 cursor-pointer transition-colors hover:border-opacity-80"
             style={{ borderColor: "oklch(74.6% 0.16 232.661)" }}
           >
             <Upload className="h-6 w-6 text-muted-foreground" />
             <span className="text-sm text-muted-foreground">
-              Click to upload image
+              {imageFile ? imageFile.name : "Click to replace image"}
             </span>
             <input
               type="file"
@@ -279,14 +322,6 @@ export default function NewProjectPage() {
               className="hidden"
             />
           </label>
-
-          {imagePreview && (
-            <img
-              src={imagePreview}
-              alt="Preview"
-              className="w-full h-48 object-cover rounded-xl"
-            />
-          )}
         </div>
 
         {/* Skills */}
@@ -317,11 +352,6 @@ export default function NewProjectPage() {
                 {skill.name}
               </button>
             ))}
-            {skills.length === 0 && (
-              <p className="text-sm text-muted-foreground">
-                No skills yet. Add skills first.
-              </p>
-            )}
           </div>
         </div>
 
@@ -367,7 +397,7 @@ export default function NewProjectPage() {
               onChange={(e) =>
                 setForm((f) => ({
                   ...f,
-                  display_order: parseInt(e.target.value),
+                  display_order: parseInt(e.target.value) || 0,
                 }))
               }
               className={inputClass}
@@ -393,7 +423,6 @@ export default function NewProjectPage() {
               onChange={(e) =>
                 setForm((f) => ({ ...f, seo_title: e.target.value }))
               }
-              placeholder="Custom SEO title"
               className={inputClass}
               style={inputStyle}
             />
@@ -409,7 +438,6 @@ export default function NewProjectPage() {
                 setForm((f) => ({ ...f, seo_description: e.target.value }))
               }
               rows={2}
-              placeholder="Custom SEO description"
               className={inputClass}
               style={inputStyle}
             />
@@ -420,11 +448,11 @@ export default function NewProjectPage() {
         <div className="flex items-center gap-3">
           <button
             type="submit"
-            disabled={loading}
+            disabled={saving}
             className="px-6 py-2.5 rounded-xl text-sm font-medium text-white transition-all disabled:opacity-50 hover:-translate-y-0.5"
             style={{ background: "oklch(60% 0.18 232)" }}
           >
-            {loading ? "Saving..." : "Save Project"}
+            {saving ? "Saving..." : "Update Project"}
           </button>
           <button
             type="button"

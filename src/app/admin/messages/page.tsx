@@ -62,9 +62,9 @@ export default function AdminMessagesPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-foreground">
+          <h4 className="text-xl font-bold text-foreground">
             View and manage contact form submissions
-          </h1>
+          </h4>
         </div>
 
         {/* Filter tabs */}

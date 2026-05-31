@@ -67,9 +67,9 @@ export default function AdminResumePage() {
     <div className="space-y-6 max-w-2xl">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-foreground">
+        <h4 className="text-xl font-bold text-foreground">
           Upload or replace your resume PDF. The public URL stays the same
-        </h1>
+        </h4>
       </div>
 
       {/* Current resume */}
