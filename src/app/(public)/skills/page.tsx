@@ -37,34 +37,13 @@ export default function SkillsPage() {
       <div className="max-w-6xl mx-auto w-full">
         {/* Header */}
         <div className="mb-10">
-          <div
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-sm mb-6"
-            style={{
-              borderColor: "oklch(74.6% 0.16 232.661)",
-              color: "oklch(50% 0.18 232)",
-            }}
-          >
-            <span className="relative flex h-2 w-2">
-              <span
-                className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
-                style={{ backgroundColor: "#00ffd5" }}
-              />
-              <span
-                className="relative inline-flex rounded-full h-2 w-2"
-                style={{ backgroundColor: "#00ffd5" }}
-              />
-            </span>
-            Tech Stack
-          </div>
-          <h1 className="text-4xl font-bold text-foreground">
-            Skills & Technologies
-          </h1>
-          <p className="text-muted-foreground mt-2">
-            Tools and technologies I use to build production-ready systems.
-          </p>
+          <h6 className="text-center text-xl font-bold text-foreground">
+            Technologies I use to build production-ready systems
+          </h6>
         </div>
 
         {/* Filter tabs */}
+
         <div className="flex flex-wrap gap-2 mb-10">
           {categories.map((cat) => (
             <button
@@ -73,10 +52,10 @@ export default function SkillsPage() {
               className="px-4 py-1.5 rounded-full text-sm font-medium border transition-all capitalize"
               style={{
                 backgroundColor:
-                  active === cat ? "oklch(60% 0.18 232)" : "transparent",
+                  active === cat ? "oklch(60% 0.18 232 / 0.15)" : "transparent",
                 borderColor:
                   active === cat ? "oklch(60% 0.18 232)" : "var(--border)",
-                color: active === cat ? "white" : "var(--muted-foreground)",
+                color: active === cat ? "blue" : "var(--muted-foreground)",
               }}
             >
               {cat}

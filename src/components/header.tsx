@@ -35,7 +35,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b backdrop-blur-sm">
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-        <Link href="/" className="font-bold text-lg tracking-tight">
+        <Link href="/" className="font-bold text-lg">
           <span style={{ color: "oklch(60% 0.18 232)" }}>raff</span>
           <span className="text-foreground">Simplified</span>
         </Link>

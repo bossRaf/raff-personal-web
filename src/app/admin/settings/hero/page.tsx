@@ -75,10 +75,9 @@ export default function HeroSettingsPage() {
           <ArrowLeft className="h-4 w-4 text-muted-foreground" />
         </button>
         <div>
-          <h1 className="text-2xl font-bold text-foreground">Hero Section</h1>
-          <p className="text-sm text-muted-foreground mt-1">
-            Edit your homepage headline and CTA.
-          </p>
+          <h1 className="text-2xl font-bold text-foreground">
+            Edit your homepage headline and CTA
+          </h1>
         </div>
       </div>
 

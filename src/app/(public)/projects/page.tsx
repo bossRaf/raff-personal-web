@@ -50,29 +50,9 @@ export default function ProjectsPage() {
       <div className="max-w-6xl mx-auto w-full">
         {/* Header */}
         <div className="mb-10">
-          <div
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-sm mb-6"
-            style={{
-              borderColor: "oklch(74.6% 0.16 232.661)",
-              color: "oklch(50% 0.18 232)",
-            }}
-          >
-            <span className="relative flex h-2 w-2">
-              <span
-                className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
-                style={{ backgroundColor: "#00ffd5" }}
-              />
-              <span
-                className="relative inline-flex rounded-full h-2 w-2"
-                style={{ backgroundColor: "#00ffd5" }}
-              />
-            </span>
-            Portfolio
-          </div>
-          <h1 className="text-4xl font-bold text-foreground">Projects</h1>
-          <p className="text-muted-foreground mt-2">
-            Real-world systems I've built and shipped.
-          </p>
+          <h6 className="text-center text-xl font-bold text-foreground">
+            Real-world systems I've built and shipped
+          </h6>
         </div>
 
         {/* Filter tabs */}
@@ -84,10 +64,10 @@ export default function ProjectsPage() {
               className="px-4 py-1.5 rounded-full text-sm font-medium border transition-all capitalize"
               style={{
                 backgroundColor:
-                  active === f ? "oklch(60% 0.18 232)" : "transparent",
+                  active === f ? "oklch(60% 0.18 232 / 0.15)" : "transparent",
                 borderColor:
                   active === f ? "oklch(60% 0.18 232)" : "var(--border)",
-                color: active === f ? "white" : "var(--muted-foreground)",
+                color: active === f ? "blue" : "var(--muted-foreground)",
               }}
             >
               {f === "all" ? "All Projects" : "Featured"}

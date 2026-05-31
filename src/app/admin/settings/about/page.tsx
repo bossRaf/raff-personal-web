@@ -98,10 +98,9 @@ export default function AboutSettingsPage() {
           <ArrowLeft className="h-4 w-4 text-muted-foreground" />
         </button>
         <div>
-          <h1 className="text-2xl font-bold text-foreground">About Section</h1>
-          <p className="text-sm text-muted-foreground mt-1">
-            Edit your bio, timeline, name, role and location.
-          </p>
+          <h1 className="text-2xl font-bold text-foreground">
+            Edit your bio, timeline, name, role and location
+          </h1>
         </div>
       </div>
 

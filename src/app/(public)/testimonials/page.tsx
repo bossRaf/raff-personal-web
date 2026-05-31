@@ -39,30 +39,10 @@ export default function TestimonialsPage() {
       <div className="max-w-6xl mx-auto w-full">
         {/* Header */}
         <div className="mb-10">
-          <div
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-sm mb-6"
-            style={{
-              borderColor: "oklch(74.6% 0.16 232.661)",
-              color: "oklch(50% 0.18 232)",
-            }}
-          >
-            <span className="relative flex h-2 w-2">
-              <span
-                className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
-                style={{ backgroundColor: "#00ffd5" }}
-              />
-              <span
-                className="relative inline-flex rounded-full h-2 w-2"
-                style={{ backgroundColor: "#00ffd5" }}
-              />
-            </span>
-            Social Proof
-          </div>
-          <h1 className="text-4xl font-bold text-foreground">Testimonials</h1>
-          <p className="text-muted-foreground mt-2">
-            What clients and collaborators say. All testimonials are manually
-            approved.
-          </p>
+          <h6 className="text-center text-xl font-bold text-foreground">
+            What clients and collaborators say? All testimonials are
+            manuallyapproved
+          </h6>
         </div>
 
         {/* Testimonials grid */}
@@ -138,9 +118,9 @@ export default function TestimonialsPage() {
           </div>
         )}
 
-        {/* Submit CTA */}
+        {/* Submit CTA    border-2 border-dashed */}
         <div
-          className="mt-16 rounded-2xl border-2 border-dashed p-10 text-center space-y-4"
+          className="mt-16 rounded-2xl p-10 text-center space-y-4"
           style={{ borderColor: "oklch(74.6% 0.16 232.661)" }}
         >
           <h3 className="text-xl font-bold text-foreground">Worked with me?</h3>

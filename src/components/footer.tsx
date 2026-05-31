@@ -1,8 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FaGithub, FaFacebook } from "react-icons/fa";
-import { Mail } from "lucide-react";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { useState } from "react";
 import { LoginModal } from "@/components/login-modal";
 
@@ -17,7 +16,15 @@ export function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {/* Brand */}
             <div className="space-y-3">
-              <h3 className="font-bold text-lg">raffSimplified</h3>
+              <span
+                className="font-bold text-lg tracking-tight"
+                style={{ color: "oklch(60% 0.18 232)" }}
+              >
+                raff
+              </span>
+              <span className="text-foreground font-bold text-lg">
+                Simplified
+              </span>
               <p className="text-sm text-muted-foreground">
                 Building production-ready web applications with modern
                 technologies.
@@ -32,11 +39,11 @@ export function Footer() {
                 </Link>
 
                 <Link
-                  href="https://www.facebook.com/raffSimplified"
+                  href="https://www.linkedin.com/in/raffy-maluya-47090a328"
                   target="_blank"
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  <FaFacebook className="h-4 w-4" />
+                  <FaLinkedin className="h-4 w-4" />
                 </Link>
               </div>
             </div>

@@ -249,7 +249,7 @@ export default function ContactPage() {
                     type="submit"
                     disabled={loading}
                     className="w-full inline-flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium text-white transition-all disabled:opacity-50 hover:-translate-y-0.5"
-                    style={{ background: "oklch(60% 0.18 232)" }}
+                    style={{ background: "oklch(60% 0.18 232 / 0.15)" }}
                   >
                     <Send className="h-4 w-4" />
                     {loading ? "Sending..." : "Send Message"}

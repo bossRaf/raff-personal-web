@@ -41,7 +41,7 @@ export default function AboutPage() {
 
   const defaultTimeline = [
     {
-      year: "2025",
+      year: "2026",
       title: "Freelance Full-Stack Developer",
       company: "Self-employed",
     },
@@ -51,9 +51,9 @@ export default function AboutPage() {
       company: "School & Personal",
     },
     {
-      year: "2023",
+      year: "2024",
       title: "Started Self-Learning",
-      company: "Next.js, Supabase, TypeScript",
+      company: "W3school & Documentions",
     },
   ];
 
@@ -63,28 +63,6 @@ export default function AboutPage() {
   return (
     <section className="min-h-[calc(100vh-4rem)] px-4 py-16">
       <div className="max-w-6xl mx-auto w-full">
-        {/* Availability badge */}
-        <div className="mb-12">
-          <div
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-sm"
-            style={{
-              borderColor: "oklch(74.6% 0.16 232.661)",
-              color: "oklch(50% 0.18 232)",
-            }}
-          >
-            <span className="relative flex h-2 w-2">
-              <span
-                className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
-                style={{ backgroundColor: "#00ffd5" }}
-              />
-              <span
-                className="relative inline-flex rounded-full h-2 w-2"
-                style={{ backgroundColor: "#00ffd5" }}
-              />
-            </span>
-            Available for Freelance and Collaboration
-          </div>
-        </div>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
           {/* LEFT — Sticky profile card */}
           <div className="lg:col-span-1">
@@ -173,6 +151,29 @@ export default function AboutPage() {
                     {paragraph}
                   </p>
                 ))}
+              </div>
+            </div>
+
+            {/* Availability badge */}
+            <div className="mb-12">
+              <div
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-sm"
+                style={{
+                  borderColor: "oklch(74.6% 0.16 232.661)",
+                  color: "oklch(50% 0.18 232)",
+                }}
+              >
+                <span className="relative flex h-2 w-2">
+                  <span
+                    className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
+                    style={{ backgroundColor: "#00ffd5" }}
+                  />
+                  <span
+                    className="relative inline-flex rounded-full h-2 w-2"
+                    style={{ backgroundColor: "#00ffd5" }}
+                  />
+                </span>
+                Available for Freelance and Collaboration
               </div>
             </div>
 

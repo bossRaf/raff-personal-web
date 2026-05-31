@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { Mail, ArrowRight, ExternalLink } from "lucide-react";
+import { ArrowRight, ExternalLink } from "lucide-react";
 
 interface HeroContent {
   title: string;
@@ -24,14 +24,8 @@ const terminalLines = [
   {
     prompt: "~",
     command: "supabase status",
-    output: "● API URL: https://xyz.supabase.co",
+    output: "● API URL: https://hnyhnhiaunpqbusdxgrm.supabase.co",
   },
-];
-
-const stats = [
-  { label: "Projects Shipped", value: "10+" },
-  { label: "Years Experience", value: "2+" },
-  { label: "Happy Clients", value: "5+" },
 ];
 
 export default function HomePage() {
@@ -66,27 +60,6 @@ export default function HomePage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* LEFT COLUMN */}
           <div className="space-y-8">
-            {/* Availability badge */}
-            <div
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-sm"
-              style={{
-                borderColor: "oklch(74.6% 0.16 232.661)",
-                color: "oklch(50% 0.18 232)",
-              }}
-            >
-              <span className="relative flex h-2 w-2">
-                <span
-                  className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
-                  style={{ backgroundColor: "#00ffd5" }}
-                />
-                <span
-                  className="relative inline-flex rounded-full h-2 w-2"
-                  style={{ backgroundColor: "#00ffd5" }}
-                />
-              </span>
-              Available for Freelance and Collaboration
-            </div>
-
             {/* Headline */}
             <div className="space-y-3">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight text-foreground">
@@ -141,10 +114,11 @@ export default function HomePage() {
                 </Link>
 
                 <Link
-                  href="mailto:raffsimplified@email.com"
+                  href="https://www.linkedin.com/in/raffy-maluya-47090a328"
+                  target="_blank"
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  <Mail className="h-5 w-5" />
+                  <FaLinkedin className="h-5 w-5" />
                 </Link>
               </div>
             </div>
@@ -228,20 +202,6 @@ export default function HomePage() {
                   </span>
                 ))}
               </div>
-            </div>
-
-            {/* STATS ROW */}
-            <div className="grid grid-cols-3 gap-6">
-              {stats.map((stat) => (
-                <div key={stat.label} className="space-y-1">
-                  <p className="text-3xl font-bold text-foreground">
-                    {stat.value}
-                  </p>
-                  <p className="text-xs text-muted-foreground leading-tight">
-                    {stat.label}
-                  </p>
-                </div>
-              ))}
             </div>
           </div>
         </div>

@@ -78,10 +78,9 @@ export default function SocialSettingsPage() {
           <ArrowLeft className="h-4 w-4 text-muted-foreground" />
         </button>
         <div>
-          <h1 className="text-2xl font-bold text-foreground">Social Links</h1>
-          <p className="text-sm text-muted-foreground mt-1">
-            Edit your GitHub, LinkedIn, email and other social links.
-          </p>
+          <h1 className="text-2xl font-bold text-foreground">
+            Edit your gitHub, email and other social links
+          </h1>
         </div>
       </div>
 
