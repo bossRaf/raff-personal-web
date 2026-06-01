@@ -118,13 +118,6 @@ export default function AdminDashboard() {
 
   return (
     <div className="space-y-8">
-      {/* Header */}
-      <div>
-        <h4 className="text-xl font-bold text-foreground">
-          Welcome back. Here's what's happening
-        </h4>
-      </div>
-
       {/* Stats cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
         {statCards.map((card) => {

@@ -147,15 +147,10 @@ export default function AdminSkillsPage() {
       <div className="space-y-6">
         {/* Header */}
         <div className="flex items-center justify-between">
-          <div>
-            <h4 className="text-xl font-bold text-foreground">
-              Manage your tech stack and skill categories
-            </h4>
-          </div>
           <button
             onClick={openAdd}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-white transition-all hover:-translate-y-0.5"
-            style={{ background: "oklch(60% 0.18 232)" }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold text-blue-500 transition-all hover:-translate-y-0.5"
+            style={{ background: "oklch(60% 0.18 232 / 0.15)" }}
           >
             <Plus className="h-4 w-4" />
             Add Skill
@@ -275,8 +270,8 @@ export default function AdminSkillsPage() {
                 <button
                   type="submit"
                   disabled={saving}
-                  className="px-5 py-2 rounded-xl text-sm font-medium text-white disabled:opacity-50 transition-all hover:-translate-y-0.5"
-                  style={{ background: "oklch(60% 0.18 232)" }}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold text-blue-500 transition-all hover:-translate-y-0.5"
+                  style={{ background: "oklch(60% 0.18 232 / 0.15)" }}
                 >
                   {saving
                     ? "Saving..."
@@ -287,8 +282,8 @@ export default function AdminSkillsPage() {
                 <button
                   type="button"
                   onClick={closeForm}
-                  className="px-5 py-2 rounded-xl text-sm font-medium border text-foreground transition-all hover:-translate-y-0.5"
-                  style={{ borderColor: "var(--border)" }}
+                  className="px-6 py-2 rounded-xl text-sm font-bold border-2 transition-all text-blue-500 hover:-translate-y-0.5"
+                  style={{ borderColor: "oklch(60% 0.18 232 / 0.15)" }}
                 >
                   Cancel
                 </button>

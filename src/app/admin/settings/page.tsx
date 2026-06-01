@@ -57,13 +57,6 @@ export default function AdminSettingsPage() {
 
   return (
     <div className="space-y-6 max-w-2xl">
-      {/* Header */}
-      <div>
-        <h4 className="text-xl font-bold text-foreground">
-          Manage your portfolio content and preferences
-        </h4>
-      </div>
-
       {/* Default theme */}
       <div
         className="rounded-2xl border p-6 space-y-4"

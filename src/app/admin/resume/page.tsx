@@ -65,23 +65,16 @@ export default function AdminResumePage() {
 
   return (
     <div className="space-y-6 max-w-2xl">
-      {/* Header */}
-      <div>
-        <h4 className="text-xl font-bold text-foreground">
-          Upload or replace your resume PDF. The public URL stays the same
-        </h4>
-      </div>
-
       {/* Current resume */}
       {currentUrl && (
         <div
           className="rounded-2xl border p-6 space-y-3"
           style={{ backgroundColor: "var(--card)" }}
         >
-          <h2 className="font-semibold text-foreground">Current Resume</h2>
+          <h2 className="font-bold text-blue-500">Current Resume</h2>
           <div
-            className="flex items-center gap-3 p-4 rounded-xl border"
-            style={{ borderColor: "oklch(74.6% 0.16 232.661)" }}
+            className="flex items-center gap-3 p-4 rounded-xl border-2"
+            style={{ borderColor: "oklch(60% 0.18 232 / 0.15)" }}
           >
             <FileText
               className="h-8 w-8 shrink-0"
@@ -111,7 +104,7 @@ export default function AdminResumePage() {
         className="rounded-2xl border p-6 space-y-4"
         style={{ backgroundColor: "var(--card)" }}
       >
-        <h2 className="font-semibold text-foreground">
+        <h2 className="font-bold text-blue-500">
           {currentUrl ? "Replace Resume" : "Upload Resume"}
         </h2>
 
@@ -140,10 +133,9 @@ export default function AdminResumePage() {
             Resume uploaded successfully! Public URL remains the same.
           </div>
         )}
-
         <label
-          className="flex flex-col items-center justify-center gap-3 border-2 border-dashed rounded-xl p-10 cursor-pointer transition-colors hover:border-opacity-80"
-          style={{ borderColor: "oklch(74.6% 0.16 232.661)" }}
+          className="flex flex-col items-center justify-center gap-3 border-2 rounded-xl p-10 cursor-pointer transition-colors hover:border-opacity-80"
+          style={{ borderColor: "oklch(60% 0.18 232 / 0.15)" }}
         >
           <Upload className="h-8 w-8 text-muted-foreground" />
           <div className="text-center">
@@ -165,8 +157,8 @@ export default function AdminResumePage() {
         <button
           onClick={handleUpload}
           disabled={!file || uploading}
-          className="w-full py-2.5 rounded-xl text-sm font-medium text-white transition-all disabled:opacity-50 hover:-translate-y-0.5"
-          style={{ background: "oklch(60% 0.18 232)" }}
+          className="w-full py-2.5 rounded-xl text-xl font-bold text-blue-500 transition-all hover:-translate-y-0.5"
+          style={{ background: "oklch(60% 0.18 232 / 0.15)" }}
         >
           {uploading ? "Uploading..." : "Upload Resume"}
         </button>

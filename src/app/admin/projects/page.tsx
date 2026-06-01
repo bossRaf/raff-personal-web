@@ -79,16 +79,10 @@ export default function AdminProjectsPage() {
       <div className="space-y-6">
         {/* Header */}
         <div className="flex items-center justify-between">
-          <div>
-            <h4 className="text-xl font-bold text-foreground">
-              Manage your portfolio projects
-            </h4>
-          </div>
-
           <a
             href="/admin/projects/new"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-white transition-all hover:-translate-y-0.5"
-            style={{ background: "oklch(60% 0.18 232)" }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold text-blue-500 transition-all hover:-translate-y-0.5"
+            style={{ background: "oklch(60% 0.18 232 / 0.15)" }}
           >
             <Plus className="h-4 w-4" />
             Add Project

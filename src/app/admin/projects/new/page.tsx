@@ -421,16 +421,16 @@ export default function NewProjectPage() {
           <button
             type="submit"
             disabled={loading}
-            className="px-6 py-2.5 rounded-xl text-sm font-medium text-white transition-all disabled:opacity-50 hover:-translate-y-0.5"
-            style={{ background: "oklch(60% 0.18 232)" }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold text-blue-500 transition-all hover:-translate-y-0.5"
+            style={{ background: "oklch(60% 0.18 232 / 0.15)" }}
           >
             {loading ? "Saving..." : "Save Project"}
           </button>
           <button
             type="button"
             onClick={() => router.back()}
-            className="px-6 py-2.5 rounded-xl text-sm font-medium border transition-all text-foreground hover:-translate-y-0.5"
-            style={{ borderColor: "var(--border)" }}
+            className="px-6 py-2 rounded-xl text-sm font-bold border-2 transition-all text-blue-500 hover:-translate-y-0.5"
+            style={{ borderColor: "oklch(60% 0.18 232 / 0.15)" }}
           >
             Cancel
           </button>
