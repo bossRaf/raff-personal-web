@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
-import { Sun, Moon } from "lucide-react";
+import { Sun, Moon, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -20,10 +20,22 @@ export function Header() {
   const pathname = usePathname();
   const { theme, setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setMenuOpen(false);
+      }
+    }
+    if (menuOpen) document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [menuOpen]);
 
   const getActiveBg = () => {
     if (!mounted) return "oklch(74.6% 0.16 232.661)";
@@ -35,11 +47,53 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b backdrop-blur-sm">
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-        <Link href="/" className="font-bold text-lg">
-          <span style={{ color: "oklch(60% 0.18 232)" }}>raff</span>
-          <span className="text-foreground">Simplified</span>
-        </Link>
+        {/* Left — Logo + Hamburger */}
+        <div className="flex items-center gap-2" ref={menuRef}>
+          <Link href="/" className="font-bold text-lg">
+            <span style={{ color: "oklch(60% 0.18 232)" }}>raff</span>
+            <span className="text-foreground">Simplified</span>
+          </Link>
 
+          {/* Hamburger — mobile/tablet only */}
+          <button
+            className="md:hidden p-1.5 rounded-lg hover:bg-accent transition-colors"
+            onClick={() => setMenuOpen((o) => !o)}
+            aria-label="Toggle menu"
+          >
+            {menuOpen ? (
+              <X className="h-5 w-5 text-foreground" />
+            ) : (
+              <Menu className="h-5 w-5 text-foreground" />
+            )}
+          </button>
+
+          {/* Dropdown menu */}
+          {menuOpen && (
+            <div
+              className="absolute top-16 left-0 w-full border-b shadow-lg z-50 md:hidden"
+              style={{ backgroundColor: "var(--card)" }}
+            >
+              <nav className="max-w-6xl mx-auto px-4 py-3 flex flex-col gap-1">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setMenuOpen(false)}
+                    className="px-3 py-2.5 rounded-lg text-sm font-bold transition-colors text-blue-700"
+                    style={{
+                      backgroundColor:
+                        pathname === link.href ? getActiveBg() : "transparent",
+                    }}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </nav>
+            </div>
+          )}
+        </div>
+
+        {/* Center — Desktop nav */}
         <nav className="hidden md:flex items-center gap-1">
           {navLinks.map((link) => (
             <Link
@@ -58,6 +112,7 @@ export function Header() {
           ))}
         </nav>
 
+        {/* Right — Theme toggle + Hire Me */}
         <div className="flex items-center gap-2">
           <Button
             variant="ghost"

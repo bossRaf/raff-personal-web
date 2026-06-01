@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import { createClient } from "@/lib/supabase/client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
   LayoutDashboard,
   FolderKanban,
@@ -16,6 +16,8 @@ import {
   Sun,
   Moon,
   LogOut,
+  Menu,
+  X,
 } from "lucide-react";
 
 const navLinks = [
@@ -32,30 +34,30 @@ const navLinks = [
   { href: "/admin/settings", label: "Settings", icon: Settings },
 ];
 
-export function AdminSidebar() {
-  const pathname = usePathname();
-  const router = useRouter();
-  const { theme, setTheme, resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const handleLogout = async () => {
-    const supabase = createClient();
-    await supabase.auth.signOut();
-    router.push("/");
-  };
-
+function SidebarContent({
+  pathname,
+  onNavClick,
+  handleLogout,
+  mounted,
+  resolvedTheme,
+  setTheme,
+}: {
+  pathname: string;
+  onNavClick?: () => void;
+  handleLogout: () => void;
+  mounted: boolean;
+  resolvedTheme: string | undefined;
+  setTheme: (theme: string) => void;
+}) {
   return (
-    <aside
-      className="w-64 shrink-0 h-screen sticky top-0 flex flex-col border-r"
-      style={{ backgroundColor: "var(--card)" }}
-    >
+    <>
       {/* Logo */}
       <div className="px-6 py-5 border-b">
-        <Link href="/admin" className="font-bold text-lg tracking-tight">
+        <Link
+          href="/admin"
+          className="font-bold text-lg tracking-tight"
+          onClick={onNavClick}
+        >
           <span style={{ color: "oklch(60% 0.18 232)" }}>raff</span>
           <span className="text-foreground">Simplified</span>
         </Link>
@@ -70,12 +72,12 @@ export function AdminSidebar() {
             <Link
               key={link.href}
               href={link.href}
-              className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all"
+              onClick={onNavClick}
+              className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-blue-600 font-medium transition-all"
               style={{
                 backgroundColor: isActive
-                  ? "oklch(60% 0.18 232)"
+                  ? "oklch(60% 0.18 232 / 0.15)"
                   : "transparent",
-                color: isActive ? "white" : "var(--muted-foreground)",
               }}
               onMouseEnter={(e) => {
                 if (!isActive)
@@ -96,10 +98,9 @@ export function AdminSidebar() {
 
       {/* Bottom */}
       <div className="px-3 py-4 border-t space-y-1">
-        {/* Theme toggle */}
         <button
           onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-muted-foreground transition-all hover:bg-accent"
+          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-blue-600 transition-all hover:bg-accent"
         >
           {mounted && resolvedTheme === "dark" ? (
             <Sun className="h-4 w-4 shrink-0" />
@@ -109,7 +110,6 @@ export function AdminSidebar() {
           {mounted && resolvedTheme === "dark" ? "Light Mode" : "Dark Mode"}
         </button>
 
-        {/* Logout */}
         <button
           onClick={handleLogout}
           className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all"
@@ -125,6 +125,146 @@ export function AdminSidebar() {
           Logout
         </button>
       </div>
-    </aside>
+    </>
+  );
+}
+
+export function AdminSidebar() {
+  const pathname = usePathname();
+  const router = useRouter();
+  const { setTheme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const sidebarRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (
+        sidebarRef.current &&
+        !sidebarRef.current.contains(e.target as Node)
+      ) {
+        setMobileOpen(false);
+      }
+    }
+    if (mobileOpen) document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [mobileOpen]);
+
+  const handleLogout = async () => {
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    router.push("/");
+  };
+
+  const sharedProps = {
+    pathname,
+    handleLogout,
+    mounted,
+    resolvedTheme,
+    setTheme,
+  };
+
+  return (
+    <>
+      {/* Desktop sidebar */}
+      <aside
+        className="hidden md:flex w-64 shrink-0 h-screen sticky top-0 flex-col border-r"
+        style={{ backgroundColor: "var(--card)" }}
+      >
+        <SidebarContent {...sharedProps} />
+      </aside>
+
+      {/* Mobile top bar */}
+      {/* <div
+        className="md:hidden fixed top-0 left-0 right-0 z-50 h-14 flex items-center justify-between px-4 border-b"
+        style={{ backgroundColor: "var(--card)" }}
+      >
+        <Link href="/admin" className="font-bold text-lg tracking-tight">
+          <span style={{ color: "oklch(60% 0.18 232)" }}>raff</span>
+          <span className="text-foreground">Simplified</span>
+        </Link>
+
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() =>
+              setTheme(resolvedTheme === "dark" ? "light" : "dark")
+            }
+            className="p-1.5 rounded-lg hover:bg-accent transition-colors"
+          >
+            {mounted && resolvedTheme === "dark" ? (
+              <Sun className="h-5 w-5 text-foreground" />
+            ) : (
+              <Moon className="h-5 w-5 text-foreground" />
+            )}
+          </button>
+          <button
+            onClick={() => setMobileOpen((o) => !o)}
+            className="p-1.5 rounded-lg hover:bg-accent transition-colors"
+          >
+            {mobileOpen ? (
+              <X className="h-5 w-5 text-foreground" />
+            ) : (
+              <Menu className="h-5 w-5 text-foreground" />
+            )}
+          </button>
+        </div>
+      </div> */}
+      <div
+        className="md:hidden fixed top-0 left-0 right-0 z-50 h-14 flex items-center justify-between px-4 border-b"
+        style={{ backgroundColor: "var(--card)" }}
+      >
+        <div className="flex items-center gap-3">
+          <Link href="/admin" className="font-bold text-lg tracking-tight">
+            <span style={{ color: "oklch(60% 0.18 232)" }}>raff</span>
+            <span className="text-foreground">Simplified</span>
+          </Link>
+          <button
+            onClick={() =>
+              setTheme(resolvedTheme === "dark" ? "light" : "dark")
+            }
+            className="p-1.5 rounded-lg hover:bg-accent transition-colors"
+          >
+            {mounted && resolvedTheme === "dark" ? (
+              <Sun className="h-5 w-5 text-foreground" />
+            ) : (
+              <Moon className="h-5 w-5 text-foreground" />
+            )}
+          </button>
+        </div>
+        <button
+          onClick={() => setMobileOpen((o) => !o)}
+          className="p-1.5 rounded-lg hover:bg-accent transition-colors"
+        >
+          {mobileOpen ? (
+            <X className="h-5 w-5 text-foreground" />
+          ) : (
+            <Menu className="h-5 w-5 text-foreground" />
+          )}
+        </button>
+      </div>
+
+      {/* Mobile sidebar overlay */}
+      {mobileOpen && (
+        <div
+          className="md:hidden fixed inset-0 z-40"
+          style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+        >
+          <aside
+            ref={sidebarRef}
+            className="w-64 h-full flex flex-col border-r"
+            style={{ backgroundColor: "var(--card)" }}
+          >
+            <SidebarContent
+              {...sharedProps}
+              onNavClick={() => setMobileOpen(false)}
+            />
+          </aside>
+        </div>
+      )}
+    </>
   );
 }

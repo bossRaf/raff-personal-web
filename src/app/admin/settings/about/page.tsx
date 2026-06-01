@@ -31,8 +31,12 @@ export default function AboutSettingsPage() {
     timeline: [{ year: "", title: "", company: "" }],
   });
   const [loading, setLoading] = useState(true);
-  const [saving, setSaving] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const [savingBasic, setSavingBasic] = useState(false);
+  const [savingBio, setSavingBio] = useState(false);
+  const [savingTimeline, setSavingTimeline] = useState(false);
+  const [successBasic, setSuccessBasic] = useState(false);
+  const [successBio, setSuccessBio] = useState(false);
+  const [successTimeline, setSuccessTimeline] = useState(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -58,18 +62,66 @@ export default function AboutSettingsPage() {
       });
   }, []);
 
-  async function handleSave() {
-    setSaving(true);
+  async function getCurrentAbout() {
+    const supabase = createClient();
+    const { data } = await supabase
+      .from("settings")
+      .select("about_content")
+      .single();
+    return (data?.about_content as AboutContent) || about;
+  }
+
+  async function saveBasic() {
+    setSavingBasic(true);
     setError("");
-    setSuccess(false);
+    setSuccessBasic(false);
+    const current = await getCurrentAbout();
     const supabase = createClient();
     const { error } = await supabase
       .from("settings")
-      .update({ about_content: about })
+      .update({
+        about_content: {
+          ...current,
+          name: about.name,
+          role: about.role,
+          location: about.location,
+          available: about.available,
+        },
+      })
       .eq("id", 1);
     if (error) setError(error.message);
-    else setSuccess(true);
-    setSaving(false);
+    else setSuccessBasic(true);
+    setSavingBasic(false);
+  }
+
+  async function saveBio() {
+    setSavingBio(true);
+    setError("");
+    setSuccessBio(false);
+    const current = await getCurrentAbout();
+    const supabase = createClient();
+    const { error } = await supabase
+      .from("settings")
+      .update({ about_content: { ...current, bio: about.bio } })
+      .eq("id", 1);
+    if (error) setError(error.message);
+    else setSuccessBio(true);
+    setSavingBio(false);
+  }
+
+  async function saveTimeline() {
+    setSavingTimeline(true);
+    setError("");
+    setSuccessTimeline(false);
+    const current = await getCurrentAbout();
+    const supabase = createClient();
+    const { error } = await supabase
+      .from("settings")
+      .update({ about_content: { ...current, timeline: about.timeline } })
+      .eq("id", 1);
+    if (error) setError(error.message);
+    else setSuccessTimeline(true);
+    setSavingTimeline(false);
   }
 
   const inputClass =
@@ -78,6 +130,10 @@ export default function AboutSettingsPage() {
     backgroundColor: "var(--background)",
     borderColor: "var(--border)",
   };
+
+  const saveButtonClass =
+    "inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold text-blue-500 border transition-all hover:-translate-y-0.5";
+  const saveButtonStyle = { background: "oklch(60% 0.18 232 / 0.15)" };
 
   if (loading) {
     return (
@@ -100,7 +156,7 @@ export default function AboutSettingsPage() {
         </button>
       </div>
 
-      {/* Feedback */}
+      {/* Error */}
       {error && (
         <div
           className="px-4 py-3 rounded-lg text-sm border"
@@ -111,18 +167,6 @@ export default function AboutSettingsPage() {
           }}
         >
           {error}
-        </div>
-      )}
-      {success && (
-        <div
-          className="px-4 py-3 rounded-lg text-sm border"
-          style={{
-            backgroundColor: "oklch(95% 0.05 150)",
-            borderColor: "oklch(80% 0.1 150)",
-            color: "oklch(40% 0.15 150)",
-          }}
-        >
-          About section saved successfully.
         </div>
       )}
 
@@ -138,7 +182,7 @@ export default function AboutSettingsPage() {
             <label className="text-sm font-medium text-foreground">Name</label>
             <input
               type="text"
-              value={about.name}
+              value={about.name ?? ""}
               onChange={(e) =>
                 setAbout((a) => ({ ...a, name: e.target.value }))
               }
@@ -151,7 +195,7 @@ export default function AboutSettingsPage() {
             <label className="text-sm font-medium text-foreground">Role</label>
             <input
               type="text"
-              value={about.role}
+              value={about.role ?? ""}
               onChange={(e) =>
                 setAbout((a) => ({ ...a, role: e.target.value }))
               }
@@ -166,7 +210,7 @@ export default function AboutSettingsPage() {
             </label>
             <input
               type="text"
-              value={about.location}
+              value={about.location ?? ""}
               onChange={(e) =>
                 setAbout((a) => ({ ...a, location: e.target.value }))
               }
@@ -195,6 +239,22 @@ export default function AboutSettingsPage() {
             </select>
           </div>
         </div>
+
+        {successBasic && (
+          <p className="text-sm" style={{ color: "oklch(55% 0.18 150)" }}>
+            Basic info saved successfully.
+          </p>
+        )}
+
+        <button
+          onClick={saveBasic}
+          disabled={savingBasic}
+          className={saveButtonClass}
+          style={saveButtonStyle}
+        >
+          <Save className="h-4 w-4" />
+          {savingBasic ? "Saving..." : "Save Basic Info"}
+        </button>
       </div>
 
       {/* Bio */}
@@ -242,6 +302,22 @@ export default function AboutSettingsPage() {
             + Add paragraph
           </button>
         </div>
+
+        {successBio && (
+          <p className="text-sm" style={{ color: "oklch(55% 0.18 150)" }}>
+            Bio saved successfully.
+          </p>
+        )}
+
+        <button
+          onClick={saveBio}
+          disabled={savingBio}
+          className={saveButtonClass}
+          style={saveButtonStyle}
+        >
+          <Save className="h-4 w-4" />
+          {savingBio ? "Saving..." : "Save Bio"}
+        </button>
       </div>
 
       {/* Timeline */}
@@ -320,18 +396,23 @@ export default function AboutSettingsPage() {
             + Add timeline item
           </button>
         </div>
-      </div>
 
-      {/* Save */}
-      <button
-        onClick={handleSave}
-        disabled={saving}
-        className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold text-blue-500 border transition-all hover:-translate-y-0.5"
-        style={{ background: "oklch(60% 0.18 232 / 0.15)" }}
-      >
-        <Save className="h-4 w-4" />
-        {saving ? "Saving..." : "Save About"}
-      </button>
+        {successTimeline && (
+          <p className="text-sm" style={{ color: "oklch(55% 0.18 150)" }}>
+            Timeline saved successfully.
+          </p>
+        )}
+
+        <button
+          onClick={saveTimeline}
+          disabled={savingTimeline}
+          className={saveButtonClass}
+          style={saveButtonStyle}
+        >
+          <Save className="h-4 w-4" />
+          {savingTimeline ? "Saving..." : "Save Timeline"}
+        </button>
+      </div>
     </div>
   );
 }
