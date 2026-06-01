@@ -131,7 +131,7 @@ export default function AboutSettingsPage() {
         className="rounded-2xl border p-6 space-y-4"
         style={{ backgroundColor: "var(--card)" }}
       >
-        <h2 className="font-semibold text-foreground">Basic Info</h2>
+        <h2 className="font-semibold text-blue-500">Basic Info</h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="space-y-1">
@@ -202,7 +202,7 @@ export default function AboutSettingsPage() {
         className="rounded-2xl border p-6 space-y-4"
         style={{ backgroundColor: "var(--card)" }}
       >
-        <h2 className="font-semibold text-foreground">Bio Paragraphs</h2>
+        <h2 className="font-semibold text-blue-500">Bio Paragraphs</h2>
 
         <div className="space-y-2">
           {about.bio.map((para, i) => (
@@ -227,8 +227,8 @@ export default function AboutSettingsPage() {
                     bio: a.bio.filter((_, j) => j !== i),
                   }))
                 }
-                className="px-2 py-1 rounded-lg text-xs border text-muted-foreground hover:text-foreground transition-colors shrink-0"
-                style={{ borderColor: "var(--border)" }}
+                className="px-2 rounded-lg text-xs border-2 text-muted-foreground font-bold hover:text-foreground transition-colors shrink-0"
+                style={{ background: "oklch(60% 0.18 232 / 0.15)" }}
               >
                 ✕
               </button>
@@ -249,7 +249,7 @@ export default function AboutSettingsPage() {
         className="rounded-2xl border p-6 space-y-4"
         style={{ backgroundColor: "var(--card)" }}
       >
-        <h2 className="font-semibold text-foreground">Career Timeline</h2>
+        <h2 className="font-semibold text-blue-500">Career Timeline</h2>
 
         <div className="space-y-2">
           {about.timeline.map((item, i) => (
@@ -299,8 +299,8 @@ export default function AboutSettingsPage() {
                       timeline: a.timeline.filter((_, j) => j !== i),
                     }))
                   }
-                  className="px-2 rounded-lg text-xs border text-muted-foreground hover:text-foreground transition-colors shrink-0"
-                  style={{ borderColor: "var(--border)" }}
+                  className="px-2 rounded-lg text-xs border-2 text-muted-foreground font-bold hover:text-foreground transition-colors shrink-0"
+                  style={{ background: "oklch(60% 0.18 232 / 0.15)" }}
                 >
                   ✕
                 </button>
@@ -326,8 +326,8 @@ export default function AboutSettingsPage() {
       <button
         onClick={handleSave}
         disabled={saving}
-        className="inline-flex items-center gap-2 px-5 py-2 rounded-xl text-sm font-medium text-black transition-all disabled:opacity-50 hover:-translate-y-0.5"
-        style={{ backgroundColor: "oklch(60% 0.18 232 / 0.15)" }}
+        className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold text-blue-500 border transition-all hover:-translate-y-0.5"
+        style={{ background: "oklch(60% 0.18 232 / 0.15)" }}
       >
         <Save className="h-4 w-4" />
         {saving ? "Saving..." : "Save About"}

@@ -29,7 +29,7 @@ export function Header() {
     if (!mounted) return "oklch(74.6% 0.16 232.661)";
     return theme === "dark"
       ? "oklch(35% 0.05 232)"
-      : "oklch(74.6% 0.16 232.661)";
+      : "oklch(60% 0.18 232 / 0.15)";
   };
 
   return (
@@ -45,8 +45,8 @@ export function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className={`px-3 py-2 rounded-md text-sm transition-colors hover:bg-accent text-foreground ${
-                pathname === link.href ? "font-medium" : ""
+              className={`px-3 py-2 rounded-md text-sm font-bold transition-colors hover:bg-accent text-blue-700 ${
+                pathname === link.href ? "font-bold" : ""
               }`}
               style={{
                 backgroundColor:
@@ -79,14 +79,13 @@ export function Header() {
                 filter: "blur(20px)",
                 zIndex: 0,
               }}
-              // -inset-6.25    inset-[-25px]
             />
             {/* Animated border wrapper */}
             <div
               className="hire-btn-wrapper relative rounded-xl p-0.5"
               style={{ zIndex: 2 }}
             >
-              {/* Inner button       p-0.5        p-[2px]  */}
+              {/* Inner button */}
               <div
                 className="relative px-5 py-2 text-sm font-medium rounded-[10px] cursor-pointer transition-all duration-200 group-hover:-translate-y-0.5 group-hover:scale-[1.02] overflow-hidden"
                 style={{
@@ -97,7 +96,7 @@ export function Header() {
                   color: "white",
                 }}
               >
-                {/* Dot        top-2.5  top-[10px],  left-3    left-[12px]  */}
+                {/* Dot */}
                 <div
                   className="dot absolute top-2.5 left-3 w-1.5 h-1.5 rounded-full"
                   style={{ background: "#00ffd5" }}

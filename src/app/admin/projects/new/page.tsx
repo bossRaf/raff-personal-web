@@ -421,7 +421,7 @@ export default function NewProjectPage() {
           <button
             type="submit"
             disabled={loading}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold text-blue-500 transition-all hover:-translate-y-0.5"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold text-blue-500 border transition-all hover:-translate-y-0.5"
             style={{ background: "oklch(60% 0.18 232 / 0.15)" }}
           >
             {loading ? "Saving..." : "Save Project"}

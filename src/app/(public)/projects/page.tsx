@@ -50,7 +50,7 @@ export default function ProjectsPage() {
       <div className="max-w-6xl mx-auto w-full">
         {/* Header */}
         <div className="mb-10">
-          <h6 className="text-center text-xl font-bold text-foreground">
+          <h6 className="text-center text-xl font-bold text-blue-500">
             Real-world systems I've built and shipped
           </h6>
         </div>
@@ -61,13 +61,12 @@ export default function ProjectsPage() {
             <button
               key={f}
               onClick={() => setActive(f)}
-              className="px-4 py-1.5 rounded-full text-sm font-medium border transition-all capitalize"
+              className="px-4 py-1.5 rounded-full text-sm font-medium border text-blue-500 transition-all capitalize"
               style={{
                 backgroundColor:
                   active === f ? "oklch(60% 0.18 232 / 0.15)" : "transparent",
                 borderColor:
                   active === f ? "oklch(60% 0.18 232)" : "var(--border)",
-                color: active === f ? "blue" : "var(--muted-foreground)",
               }}
             >
               {f === "all" ? "All Projects" : "Featured"}
@@ -118,8 +117,8 @@ export default function ProjectsPage() {
                   )}
                   {project.featured && (
                     <span
-                      className="absolute top-3 right-3 px-2 py-0.5 rounded-full text-xs font-medium text-white"
-                      style={{ backgroundColor: "oklch(60% 0.18 232)" }}
+                      className="absolute top-3 right-3 px-2 py-0.5 rounded-full text-xs font-bold text-blue-500 border"
+                      style={{ backgroundColor: "oklch(60% 0.18 232 / 0.15)" }}
                     >
                       Featured
                     </span>
@@ -128,7 +127,7 @@ export default function ProjectsPage() {
 
                 {/* Content */}
                 <div className="p-5 space-y-3">
-                  <h3 className="font-bold text-foreground text-lg">
+                  <h3 className="font-bold text-blue-500 text-lg">
                     {project.title}
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
@@ -171,7 +170,7 @@ export default function ProjectsPage() {
                         className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
                       >
                         <FaGithub className="h-3.5 w-3.5" />
-                        GitHub
+                        Github Repository
                       </Link>
                     )}
                   </div>

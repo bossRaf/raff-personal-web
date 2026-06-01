@@ -37,7 +37,7 @@ export default function SkillsPage() {
       <div className="max-w-6xl mx-auto w-full">
         {/* Header */}
         <div className="mb-10">
-          <h6 className="text-center text-xl font-bold text-foreground">
+          <h6 className="text-center text-xl font-bold text-blue-500">
             Technologies I use to build production-ready systems
           </h6>
         </div>
@@ -49,13 +49,12 @@ export default function SkillsPage() {
             <button
               key={cat}
               onClick={() => setActive(cat)}
-              className="px-4 py-1.5 rounded-full text-sm font-medium border transition-all capitalize"
+              className="px-4 py-1.5 rounded-full text-sm font-medium border text-blue-500 transition-all capitalize"
               style={{
                 backgroundColor:
                   active === cat ? "oklch(60% 0.18 232 / 0.15)" : "transparent",
                 borderColor:
                   active === cat ? "oklch(60% 0.18 232)" : "var(--border)",
-                color: active === cat ? "blue" : "var(--muted-foreground)",
               }}
             >
               {cat}

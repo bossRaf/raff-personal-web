@@ -23,8 +23,8 @@ const terminalLines = [
   { prompt: "~", command: "vercel deploy --prod" },
   {
     prompt: "~",
-    command: "supabase status",
-    output: "● API URL: https://abcxyz.supabase.co",
+    command: "deployment status",
+    output: "● WEB URL: https://raffsimplified.vercel.app",
   },
 ];
 
@@ -62,7 +62,7 @@ export default function HomePage() {
           <div className="space-y-8">
             {/* Headline */}
             <div className="space-y-3">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight text-foreground">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight text-blue-700">
                 {hero?.title || (
                   <>
                     Building{" "}
@@ -83,16 +83,16 @@ export default function HomePage() {
             <div className="flex flex-wrap items-center gap-3">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium text-white transition-all hover:-translate-y-0.5"
-                style={{ background: "oklch(60% 0.18 232)" }}
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold text-blue-500 border transition-all hover:-translate-y-0.5"
+                style={{ background: "oklch(60% 0.18 232 / 0.15)" }}
               >
                 {hero?.cta || "Hire Me"}
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 href="/projects"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium border transition-all hover:-translate-y-0.5 text-foreground"
-                style={{ borderColor: "oklch(74.6% 0.16 232.661)" }}
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold border-2 transition-all hover:-translate-y-0.5 text-blue-500"
+                style={{ borderColor: "oklch(60% 0.18 232 / 0.15)" }}
               >
                 View Projects
                 <ExternalLink className="h-4 w-4" />

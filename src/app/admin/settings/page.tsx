@@ -62,22 +62,19 @@ export default function AdminSettingsPage() {
         className="rounded-2xl border p-6 space-y-4"
         style={{ backgroundColor: "var(--card)" }}
       >
-        <h2 className="font-semibold text-foreground">Default Theme</h2>
-        <p className="text-sm text-muted-foreground">
-          Set the default theme for your public portfolio.
-        </p>
+        <h6 className="font-bold font-sm text-foreground">
+          Set the default theme for your public portfolio
+        </h6>
+
         <div className="flex gap-3">
           {(["light", "dark", "system"] as const).map((t) => (
             <button
               key={t}
               onClick={() => setTheme(t)}
-              className="px-4 py-2 rounded-xl text-sm font-medium border transition-all capitalize"
+              className="px-4 py-2 rounded-xl text-sm font-medium text-blue-500 border transition-all capitalize"
               style={{
                 backgroundColor:
-                  theme === t ? "oklch(60% 0.18 232)" : "transparent",
-                borderColor:
-                  theme === t ? "oklch(60% 0.18 232)" : "var(--border)",
-                color: theme === t ? "white" : "var(--muted-foreground)",
+                  theme === t ? "oklch(60% 0.18 232 / 0.15)" : "transparent",
               }}
             >
               {t}
@@ -94,8 +91,8 @@ export default function AdminSettingsPage() {
         <button
           onClick={saveTheme}
           disabled={saving}
-          className="inline-flex items-center gap-2 px-5 py-2 rounded-xl text-sm font-medium text-white transition-all disabled:opacity-50 hover:-translate-y-0.5"
-          style={{ background: "oklch(60% 0.18 232)" }}
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold text-blue-500 border transition-all hover:-translate-y-0.5"
+          style={{ background: "oklch(60% 0.18 232 / 0.15)" }}
         >
           <Save className="h-4 w-4" />
           {saving ? "Saving..." : "Save Theme"}

@@ -74,17 +74,17 @@ export default function AboutPage() {
               <div
                 className="m-3 rounded-xl overflow-hidden"
                 style={{
-                  backgroundColor: "oklch(60% 0.18 232)",
+                  backgroundColor: "oklch(60% 0.18 232 / 0.15)",
                   aspectRatio: "1 / 1",
                 }}
               >
-                <div className="w-full h-full flex items-center justify-center text-4xl font-bold text-white">
+                <div className="w-full h-full flex items-center justify-center text-4xl font-bold text-blue-500">
                   {about?.name
                     ? about.name
                         .split(" ")
                         .map((n: string) => n[0])
                         .join("")
-                    : "RS"}
+                    : "Photo"}
                 </div>
               </div>
 
@@ -92,7 +92,7 @@ export default function AboutPage() {
               <div className="px-5 pt-4 pb-5 space-y-4">
                 {/* Name + Role */}
                 <div className="space-y-0.5">
-                  <h2 className="text-lg font-bold text-foreground">
+                  <h2 className="text-2xl font-bold text-blue-500">
                     {about?.name || "Raffy Maluya"}
                   </h2>
                   <p className="text-sm text-muted-foreground">
@@ -118,8 +118,8 @@ export default function AboutPage() {
                     href={settings?.resume_url || "#"}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium text-white transition-all hover:-translate-y-0.5"
-                    style={{ background: "oklch(60% 0.18 232)" }}
+                    className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-xm font-bold text-blue-500 border transition-all hover:-translate-y-0.5"
+                    style={{ background: "oklch(60% 0.18 232 / 0.15)" }}
                   >
                     <Download className="h-4 w-4" />
                     Resume
@@ -127,8 +127,8 @@ export default function AboutPage() {
 
                   <a
                     href="/contact"
-                    className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium border transition-all hover:-translate-y-0.5 text-foreground"
-                    style={{ borderColor: "oklch(74.6% 0.16 232.661)" }}
+                    className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-bold border-2 transition-all hover:-translate-y-0.5 text-blue-500"
+                    style={{ borderColor: "oklch(60% 0.18 232 / 0.15)" }}
                   >
                     <Mail className="h-4 w-4" />
                     Message
@@ -142,7 +142,7 @@ export default function AboutPage() {
           <div className="lg:col-span-2 space-y-10">
             {/* Bio */}
             <div className="space-y-4">
-              <h3 className="text-xl font-semibold text-foreground">
+              <h3 className="text-3xl font-semibold text-blue-500">
                 Background
               </h3>
               <div className="space-y-3">
@@ -179,40 +179,18 @@ export default function AboutPage() {
 
             {/* Timeline */}
             <div className="space-y-4">
-              <h3 className="text-xl font-semibold text-foreground">
+              <h3 className="text-3xl font-semibold text-blue-500">
                 Career Journey
               </h3>
               <div className="space-y-0">
                 {timeline.map((item, i) => (
                   <div key={i} className="flex gap-4 relative">
-                    {/* Line */}
-                    {i < timeline.length - 1 && (
-                      <div
-                        className="absolute left-4.75 top-8 w-0.5 h-full -z-10"
-                        style={{ backgroundColor: "var(--border)" }}
-                      />
-                    )}
-                    {/* Dot  left-4.75    left-[19px]  */}
-                    <div
-                      className="shrink-0 w-10 h-10 rounded-full border-2 flex items-center justify-center mt-1"
-                      style={{
-                        borderColor: "oklch(60% 0.18 232)",
-                        backgroundColor: "var(--background)",
-                      }}
-                    >
-                      <span
-                        className="text-xs font-bold"
-                        style={{ color: "oklch(60% 0.18 232)" }}
-                      >
-                        {item.year.slice(-2)}
-                      </span>
-                    </div>
                     {/* Content */}
                     <div className="pb-8 space-y-0.5">
                       <p className="text-xs text-muted-foreground">
                         {item.year}
                       </p>
-                      <p className="font-semibold text-foreground">
+                      <p className="font-semibold text-blue-500">
                         {item.title}
                       </p>
                       <p className="text-sm text-muted-foreground">

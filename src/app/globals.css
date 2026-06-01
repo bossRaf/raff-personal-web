@@ -158,7 +158,7 @@
   position: absolute;
   top: 0;
   left: -120%;
-  width: 60%;
+  width: 75%;
   height: 100%;
   background: linear-gradient(
     120deg,
@@ -167,7 +167,7 @@
     transparent
   );
   transform: skewX(-20deg);
-  animation: shimmer 8s infinite;
+  animation: shimmer 2s linear infinite;
 }
 
 @keyframes shimmer {

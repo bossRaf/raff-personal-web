@@ -50,7 +50,7 @@ export default function ContactPage() {
           {/* LEFT — Info */}
           <div className="space-y-8">
             <div className="space-y-2">
-              <h2 className="text-2xl font-bold text-foreground">
+              <h2 className="text-3xl font-bold text-blue-500">
                 Let's build something amazing together
               </h2>
               <p className="text-muted-foreground leading-relaxed">
@@ -183,7 +183,7 @@ export default function ContactPage() {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="space-y-1">
-                    <h3 className="text-lg font-bold text-white">
+                    <h3 className="text-lg font-bold text-blue-500">
                       Send a message
                     </h3>
                     <p
@@ -208,7 +208,7 @@ export default function ContactPage() {
                   )}
 
                   <div className="space-y-1">
-                    <label className="text-sm font-medium text-white">
+                    <label className="text-sm font-medium text-blue-500">
                       Email
                     </label>
                     <input
@@ -227,7 +227,7 @@ export default function ContactPage() {
                   </div>
 
                   <div className="space-y-1">
-                    <label className="text-sm font-medium text-white">
+                    <label className="text-sm font-medium text-blue-500">
                       Message
                     </label>
                     <textarea
@@ -248,7 +248,7 @@ export default function ContactPage() {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full inline-flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium text-white transition-all disabled:opacity-50 hover:-translate-y-0.5"
+                    className="w-full inline-flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-bold text-blue-500 transition-all disabled:opacity-50 hover:-translate-y-0.5"
                     style={{ background: "oklch(60% 0.18 232 / 0.15)" }}
                   >
                     <Send className="h-4 w-4" />

@@ -39,7 +39,7 @@ export default function TestimonialsPage() {
       <div className="max-w-6xl mx-auto w-full">
         {/* Header */}
         <div className="mb-10">
-          <h6 className="text-center text-xl font-bold text-foreground">
+          <h6 className="text-center text-xl font-bold text-blue-500">
             What clients and collaborators say? All testimonials are
             manuallyapproved
           </h6>
@@ -123,15 +123,15 @@ export default function TestimonialsPage() {
           className="mt-16 rounded-2xl p-10 text-center space-y-4"
           style={{ borderColor: "oklch(74.6% 0.16 232.661)" }}
         >
-          <h3 className="text-xl font-bold text-foreground">Worked with me?</h3>
+          <h3 className="text-xl font-bold text-blue-500">Worked with me?</h3>
           <p className="text-muted-foreground text-sm">
             I'd love to hear your feedback. All testimonials are reviewed before
             publishing.
           </p>
           <button
             onClick={() => setModalOpen(true)}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium text-white transition-all hover:-translate-y-0.5"
-            style={{ background: "oklch(60% 0.18 232)" }}
+            className="inline-flex items-center gap-2 px-5 py-2 rounded-xl text-xl font-bold text-blue-500 border-2 transition-all hover:-translate-y-0.5"
+            style={{ background: "oklch(60% 0.18 232 / 0.15)" }}
           >
             Leave a Testimonial
           </button>
