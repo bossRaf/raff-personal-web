@@ -15,6 +15,7 @@ export function TestimonialModal({ isOpen, onClose }: TestimonialModalProps) {
   const [company, setCompany] = useState("");
   const [message, setMessage] = useState("");
   const [rating, setRating] = useState(0);
+  const [image, setImage] = useState("");
   const [hoveredRating, setHoveredRating] = useState(0);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -36,6 +37,7 @@ export function TestimonialModal({ isOpen, onClose }: TestimonialModalProps) {
       name,
       role,
       company: company || null,
+      image: image || null,
       message,
       rating,
       approved: false,
@@ -57,6 +59,36 @@ export function TestimonialModal({ isOpen, onClose }: TestimonialModalProps) {
     backgroundColor: "var(--background)",
     borderColor: "var(--border)",
   };
+
+  async function uploadImage(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    setImage("");
+
+    const supabase = createClient();
+
+    const fileExt = file.name.split(".").pop();
+    const fileName = `profile-${Date.now()}.${fileExt}`;
+
+    const { error: uploadError } = await supabase.storage
+      .from("project-images")
+      .upload(fileName, file, {
+        upsert: true,
+      });
+
+    if (uploadError) {
+      setError(uploadError.message);
+      setImage("");
+      return;
+    }
+
+    const { data } = supabase.storage
+      .from("project-images")
+      .getPublicUrl(fileName);
+
+    setImage(data.publicUrl);
+  }
 
   return (
     <div
@@ -196,6 +228,21 @@ export function TestimonialModal({ isOpen, onClose }: TestimonialModalProps) {
                 value={company}
                 onChange={(e) => setCompany(e.target.value)}
                 placeholder="Acme Inc."
+                className={inputClass}
+                style={inputStyle}
+              />
+            </div>
+
+            {/* Image */}
+
+            <div className="space-y-1">
+              <label className="text-sm font-medium text-foreground">
+                Photo
+              </label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={uploadImage}
                 className={inputClass}
                 style={inputStyle}
               />

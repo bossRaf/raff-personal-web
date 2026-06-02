@@ -10,6 +10,7 @@ interface Testimonial {
   name: string;
   role: string;
   company: string;
+  image: string;
   message: string;
   rating: number;
 }
@@ -94,15 +95,26 @@ export default function TestimonialsPage() {
                   style={{ borderColor: "var(--border)" }}
                 >
                   <div
-                    className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold text-white shrink-0"
+                    className="w-9 h-9 rounded-full overflow-hidden shrink-0"
                     style={{ backgroundColor: "oklch(60% 0.18 232)" }}
                   >
-                    {t.name
-                      .split(" ")
-                      .map((n) => n[0])
-                      .join("")
-                      .slice(0, 2)}
+                    {t.image ? (
+                      <img
+                        src={t.image}
+                        alt={t.name}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-sm font-bold text-white">
+                        {t.name
+                          .split(" ")
+                          .map((n) => n[0])
+                          .join("")
+                          .slice(0, 2)}
+                      </div>
+                    )}
                   </div>
+
                   <div>
                     <p className="text-sm font-semibold text-foreground">
                       {t.name}

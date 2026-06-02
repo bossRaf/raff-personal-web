@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 
   title: {
     default: "Raffy Maluya | Full-Stack Developer",
-    template: "%s | raffSimplified",
+    template: "%s | Raff Simplified",
   },
 
   description:
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     description:
       "Full-Stack Developer specializing in Next.js, TypeScript, Supabase, PostgreSQL, and scalable production-ready web applications.",
     url: "https://raffsimplified.vercel.app",
-    siteName: " raffSimplified",
+    siteName: "Raff Simplified",
     type: "website",
   },
 

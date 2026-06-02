@@ -279,30 +279,29 @@ export default function AboutSettingsPage() {
               <option value="false">Not available</option>
             </select>
           </div>
-          <div className="space-y-1 sm:col-span-2">
-            <div className="space-y-2 sm:col-span-2">
-              <input
-                type="file"
-                accept="image/*"
-                onChange={uploadProfileImage}
-                className={inputClass}
-                style={inputStyle}
+
+          <div className="space-y-2 sm:col-span-2">
+            <input
+              type="file"
+              accept="image/*"
+              onChange={uploadProfileImage}
+              className={inputClass}
+              style={inputStyle}
+            />
+
+            {uploadingImage && (
+              <p className="text-sm text-muted-foreground">
+                Uploading image...
+              </p>
+            )}
+
+            {about.profileImage && (
+              <img
+                src={about.profileImage}
+                alt="Profile Preview"
+                className="w-32 h-32 object-cover rounded-xl border"
               />
-
-              {uploadingImage && (
-                <p className="text-sm text-muted-foreground">
-                  Uploading image...
-                </p>
-              )}
-
-              {about.profileImage && (
-                <img
-                  src={about.profileImage}
-                  alt="Profile Preview"
-                  className="w-32 h-32 object-cover rounded-xl border"
-                />
-              )}
-            </div>
+            )}
           </div>
         </div>
 
