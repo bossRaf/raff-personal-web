@@ -16,6 +16,7 @@ interface AboutContent {
   role: string;
   location: string;
   available: boolean;
+  profileImage: string;
   bio: string[];
   timeline: TimelineItem[];
 }
@@ -27,6 +28,7 @@ export default function AboutSettingsPage() {
     role: "",
     location: "",
     available: true,
+    profileImage: "",
     bio: [""],
     timeline: [{ year: "", title: "", company: "" }],
   });
@@ -37,6 +39,7 @@ export default function AboutSettingsPage() {
   const [successBasic, setSuccessBasic] = useState(false);
   const [successBio, setSuccessBio] = useState(false);
   const [successTimeline, setSuccessTimeline] = useState(false);
+  const [uploadingImage, setUploadingImage] = useState(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -71,6 +74,43 @@ export default function AboutSettingsPage() {
     return (data?.about_content as AboutContent) || about;
   }
 
+  async function uploadProfileImage(
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    setUploadingImage(true);
+
+    const supabase = createClient();
+
+    const fileExt = file.name.split(".").pop();
+    const fileName = `profile-${Date.now()}.${fileExt}`;
+
+    const { error: uploadError } = await supabase.storage
+      .from("project-images")
+      .upload(fileName, file, {
+        upsert: true,
+      });
+
+    if (uploadError) {
+      setError(uploadError.message);
+      setUploadingImage(false);
+      return;
+    }
+
+    const { data } = supabase.storage
+      .from("project-images")
+      .getPublicUrl(fileName);
+
+    setAbout((prev) => ({
+      ...prev,
+      profileImage: data.publicUrl,
+    }));
+
+    setUploadingImage(false);
+  }
+
   async function saveBasic() {
     setSavingBasic(true);
     setError("");
@@ -86,6 +126,7 @@ export default function AboutSettingsPage() {
           role: about.role,
           location: about.location,
           available: about.available,
+          profileImage: about.profileImage,
         },
       })
       .eq("id", 1);
@@ -237,6 +278,31 @@ export default function AboutSettingsPage() {
               <option value="true">Available for work</option>
               <option value="false">Not available</option>
             </select>
+          </div>
+          <div className="space-y-1 sm:col-span-2">
+            <div className="space-y-2 sm:col-span-2">
+              <input
+                type="file"
+                accept="image/*"
+                onChange={uploadProfileImage}
+                className={inputClass}
+                style={inputStyle}
+              />
+
+              {uploadingImage && (
+                <p className="text-sm text-muted-foreground">
+                  Uploading image...
+                </p>
+              )}
+
+              {about.profileImage && (
+                <img
+                  src={about.profileImage}
+                  alt="Profile Preview"
+                  className="w-32 h-32 object-cover rounded-xl border"
+                />
+              )}
+            </div>
           </div>
         </div>
 

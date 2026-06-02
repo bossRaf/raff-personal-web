@@ -72,7 +72,7 @@ export default function SkillsPage() {
             {filtered.map((skill) => (
               <div
                 key={skill.id}
-                className="rounded-xl border p-4 flex flex-col items-center gap-2 text-center transition-all hover:-translate-y-1 hover:border-opacity-100 group cursor-default"
+                className="rounded-xl border-2 p-4 flex flex-col items-center gap-2 text-center transition-all hover:-translate-y-1 hover:border-opacity-100 group cursor-default"
                 style={{
                   backgroundColor: "var(--card)",
                   borderColor: "var(--border)",

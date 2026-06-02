@@ -84,7 +84,7 @@ export default function ProjectsPage() {
             {filtered.map((project) => (
               <div
                 key={project.id}
-                className="rounded-2xl border overflow-hidden transition-all hover:-translate-y-1 group relative"
+                className="rounded-2xl border-2 overflow-hidden transition-all hover:-translate-y-1 group relative"
                 style={{
                   backgroundColor: "var(--card)",
                   borderColor: "var(--border)",

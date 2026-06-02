@@ -9,6 +9,7 @@ interface AboutContent {
   role: string;
   location: string;
   available: boolean;
+  profileImage: string;
   bio: string[];
   timeline: { year: string; title: string; company: string }[];
 }
@@ -67,7 +68,7 @@ export default function AboutPage() {
           {/* LEFT — Sticky profile card */}
           <div className="lg:col-span-1">
             <div
-              className="lg:sticky lg:top-24 rounded-2xl border overflow-hidden"
+              className="lg:sticky lg:top-24 rounded-2xl border-4 overflow-hidden"
               style={{ backgroundColor: "var(--card)" }}
             >
               {/* Profile picture */}
@@ -78,14 +79,22 @@ export default function AboutPage() {
                   aspectRatio: "1 / 1",
                 }}
               >
-                <div className="w-full h-full flex items-center justify-center text-4xl font-bold text-blue-500">
-                  {about?.name
-                    ? about.name
-                        .split(" ")
-                        .map((n: string) => n[0])
-                        .join("")
-                    : "Photo"}
-                </div>
+                {about?.profileImage ? (
+                  <img
+                    src={about.profileImage}
+                    alt={about.name || "Profile"}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-4xl font-bold text-blue-500">
+                    {about?.name
+                      ? about.name
+                          .split(" ")
+                          .map((n: string) => n[0])
+                          .join("")
+                      : "Photo"}
+                  </div>
+                )}
               </div>
 
               {/* Info */}
