@@ -14,8 +14,31 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Dev Portfolio",
-  description: "Full-stack developer portfolio",
+  metadataBase: new URL("https://raffsimplified.vercel.app"),
+
+  title: {
+    default: "Raffy Maluya | Full-Stack Developer",
+    template: "%s | raffSimplified",
+  },
+
+  description:
+    "Full-Stack Developer specializing in Next.js, TypeScript, Supabase, PostgreSQL, and scalable production-ready web applications.",
+
+  openGraph: {
+    title: "Raffy Maluya | Full-Stack Developer",
+    description:
+      "Full-Stack Developer specializing in Next.js, TypeScript, Supabase, PostgreSQL, and scalable production-ready web applications.",
+    url: "https://raffsimplified.vercel.app",
+    siteName: " raffSimplified",
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Raffy Maluya | Full-Stack Developer",
+    description:
+      "Full-Stack Developer specializing in Next.js, TypeScript, Supabase, PostgreSQL, and scalable production-ready web applications.",
+  },
 };
 
 export default function RootLayout({
