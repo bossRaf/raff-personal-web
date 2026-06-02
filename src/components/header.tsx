@@ -135,6 +135,7 @@ export function Header() {
                 zIndex: 0,
               }}
             />
+
             {/* Animated border wrapper */}
             <div
               className="hire-btn-wrapper relative rounded-xl p-0.5"
@@ -146,19 +147,21 @@ export function Header() {
                 style={{
                   background:
                     mounted && resolvedTheme === "dark"
-                      ? "oklch(50% 0.15 232)"
-                      : "oklch(60% 0.18 232)",
+                      ? "oklch(50% 0.15 232 / 0. 15)"
+                      : "oklch(60% 0.18 232 / 0.15)",
                   color: "white",
                 }}
               >
                 {/* Dot */}
                 <div
-                  className="dot absolute top-2.5 left-3 w-1.5 h-1.5 rounded-full"
+                  className="dot absolute top-2.5 left-3 w-2 h-2 rounded-full"
                   style={{ background: "#00ffd5" }}
                 />
                 {/* Shimmer */}
                 <div className="hire-shimmer absolute top-0 left-0 w-full h-full rounded-[10px] pointer-events-none" />
-                <span className="relative z-10 pl-3">Hire Me</span>
+                <span className="relative font-bold text-black z-10 pl-3">
+                  Hire Me
+                </span>
               </div>
             </div>
           </Link>

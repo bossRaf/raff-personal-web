@@ -60,8 +60,8 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
 
         {/* Header */}
         <div className="mb-6">
-          <h2 className="text-xl font-bold text-foreground">Admin Login</h2>
-          <p className="text-sm text-muted-foreground mt-1">
+          <h2 className="text-xl font-bold text-blue-600">Admin Login</h2>
+          <p className="text-sm text-blue-600 mt-1">
             Sign in to access the dashboard
           </p>
         </div>
@@ -83,7 +83,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
         {/* Form */}
         <form onSubmit={handleLogin} className="space-y-4">
           <div className="space-y-1">
-            <label className="text-sm font-medium text-foreground">Email</label>
+            <label className="text-sm font-medium text-blue-600">Email</label>
             <input
               type="email"
               value={email}
@@ -99,7 +99,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
           </div>
 
           <div className="space-y-1">
-            <label className="text-sm font-medium text-foreground">
+            <label className="text-sm font-medium text-blue-600">
               Password
             </label>
             <div className="relative">
@@ -132,8 +132,8 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2 rounded-lg text-sm font-medium text-white transition-all duration-200 disabled:opacity-50"
-            style={{ background: "oklch(60% 0.18 232)" }}
+            className="w-full py-2 rounded-lg text-sm font-medium text-blue-600 transition-all duration-200 disabled:opacity-50"
+            style={{ background: "oklch(60% 0.18 232 / 0.15)" }}
           >
             {loading ? "Signing in..." : "Sign In"}
           </button>

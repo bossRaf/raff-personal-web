@@ -127,9 +127,9 @@ export function Footer() {
             </p>
             <button
               onClick={() => setModalOpen(true)}
-              className="text-xs text-muted-foreground/30 hover:text-muted-foreground transition-colors"
+              className="text-[8px] text-muted-foreground/30 hover:text-muted-foreground transition-colors"
             >
-              Admin
+              ==
             </button>
           </div>
         </div>
