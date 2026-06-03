@@ -68,7 +68,7 @@ export default function AboutPage() {
           {/* LEFT — Sticky profile card */}
           <div className="lg:col-span-1">
             <div
-              className="lg:sticky lg:top-24 rounded-2xl border-4 overflow-hidden"
+              className="lg:sticky lg:top-24 rounded-2xl border-2 border-blue-600 overflow-hidden"
               style={{ backgroundColor: "var(--card)" }}
             >
               {/* Profile picture */}
@@ -127,8 +127,9 @@ export default function AboutPage() {
                     href={settings?.resume_url || "#"}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-xm font-bold text-blue-500 border transition-all hover:-translate-y-0.5"
-                    style={{ background: "oklch(60% 0.18 232 / 0.15)" }}
+                    className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-xm font-bold text-blue-500 border border-blue-600 transition-all hover:-translate-y-0.5"
+                    style={{ background: "oklch(91.7% 0.08 205.041)" }}
+                    // oklch(91.7% 0.08 205.041)   60% 0.18 232 / 0.15
                   >
                     <Download className="h-4 w-4" />
                     Resume
@@ -136,8 +137,7 @@ export default function AboutPage() {
 
                   <a
                     href="/contact"
-                    className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-bold border-2 transition-all hover:-translate-y-0.5 text-blue-500"
-                    style={{ borderColor: "oklch(60% 0.18 232 / 0.15)" }}
+                    className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm border border-blue-600 transition-all hover:-translate-y-0.5 text-blue-500"
                   >
                     <Mail className="h-4 w-4" />
                     Message
