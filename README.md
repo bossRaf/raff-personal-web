@@ -252,7 +252,7 @@ RESEND_API_KEY=
 ## 1. Clone Repository
 
 ```bash
-git clone <your-repository-url>
+git clone "https://github.com/bossRaf/raff-personal-web"
 cd project-folder
 ```
 
