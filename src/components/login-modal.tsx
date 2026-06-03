@@ -132,7 +132,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2 rounded-lg text-sm font-medium text-blue-600 transition-all duration-200 disabled:opacity-50"
+            className="w-full py-2 rounded-lg border border-blue-600 text-sm font-medium text-blue-600 transition-all duration-200 disabled:opacity-50"
             style={{ background: "oklch(60% 0.18 232 / 0.15)" }}
           >
             {loading ? "Signing in..." : "Sign In"}

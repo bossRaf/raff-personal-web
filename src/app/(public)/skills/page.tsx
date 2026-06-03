@@ -44,12 +44,12 @@ export default function SkillsPage() {
 
         {/* Filter tabs */}
 
-        <div className="flex flex-wrap gap-2 mb-10">
+        <div className="flex flex-wrap justify-center gap-2 mb-10">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActive(cat)}
-              className="px-4 py-1.5 rounded-full text-sm font-medium border text-blue-500 transition-all capitalize"
+              className="px-4 py-1.5 rounded-full text-sm font-bold border text-blue-700 transition-all capitalize"
               style={{
                 backgroundColor:
                   active === cat ? "oklch(60% 0.18 232 / 0.15)" : "transparent",
@@ -72,16 +72,16 @@ export default function SkillsPage() {
             {filtered.map((skill) => (
               <div
                 key={skill.id}
-                className="rounded-xl border-2 p-4 flex flex-col items-center gap-2 text-center transition-all hover:-translate-y-1 hover:border-opacity-100 group cursor-default"
+                className="rounded-xl border border-blue-600 p-4 flex flex-col items-center gap-2 text-center transition-all hover:-translate-y-1 hover:border-opacity-100 group cursor-default"
                 style={{
                   backgroundColor: "var(--card)",
-                  borderColor: "var(--border)",
+                  //borderColor: "var(--border)",
                 }}
                 onMouseEnter={(e) =>
                   (e.currentTarget.style.borderColor = "oklch(60% 0.18 232)")
                 }
                 onMouseLeave={(e) =>
-                  (e.currentTarget.style.borderColor = "var(--border)")
+                  (e.currentTarget.style.borderColor = "oklch(60% 0.18 232)")
                 }
               >
                 {skill.icon ? (

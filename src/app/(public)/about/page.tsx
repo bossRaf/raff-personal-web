@@ -101,7 +101,7 @@ export default function AboutPage() {
               <div className="px-5 pt-4 pb-5 space-y-4">
                 {/* Name + Role */}
                 <div className="space-y-0.5">
-                  <h2 className="text-2xl font-bold text-blue-500">
+                  <h2 className="text-2xl font-bold text-blue-600">
                     {about?.name || "Raffy Maluya"}
                   </h2>
                   <p className="text-sm text-muted-foreground">
@@ -127,7 +127,7 @@ export default function AboutPage() {
                     href={settings?.resume_url || "#"}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-xm font-bold text-blue-500 border border-blue-600 transition-all hover:-translate-y-0.5"
+                    className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-xm font-bold text-blue-800 border border-blue-600 transition-all hover:-translate-y-0.5"
                     style={{ background: "oklch(91.7% 0.08 205.041)" }}
                     // oklch(91.7% 0.08 205.041)   60% 0.18 232 / 0.15
                   >

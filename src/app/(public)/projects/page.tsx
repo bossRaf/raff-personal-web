@@ -55,7 +55,7 @@ export default function ProjectsPage() {
         </div>
 
         {/* Filter tabs */}
-        <div className="flex flex-wrap gap-2 mb-10">
+        <div className="flex flex-wrap justify-center gap-2 mb-10">
           {(["all", "featured"] as Filter[]).map((f) => (
             <button
               key={f}
@@ -83,16 +83,15 @@ export default function ProjectsPage() {
             {filtered.map((project) => (
               <div
                 key={project.id}
-                className="rounded-2xl border-2 overflow-hidden transition-all hover:-translate-y-1 group relative"
+                className="rounded-2xl border-2 border-blue-600 overflow-hidden transition-all hover:-translate-y-1 group relative"
                 style={{
                   backgroundColor: "var(--card)",
-                  borderColor: "var(--border)",
                 }}
                 onMouseEnter={(e) =>
                   (e.currentTarget.style.borderColor = "oklch(60% 0.18 232)")
                 }
                 onMouseLeave={(e) =>
-                  (e.currentTarget.style.borderColor = "var(--border)")
+                  (e.currentTarget.style.borderColor = "oklch(60% 0.18 232)")
                 }
               >
                 {/* Thumbnail */}
@@ -138,10 +137,10 @@ export default function ProjectsPage() {
                     {project.skills?.slice(0, 4).map((ps, i) => (
                       <span
                         key={i}
-                        className="px-2 py-0.5 rounded-md text-xs font-medium"
+                        className="px-2 py-0.5 rounded-md text-xs text-blue-500 font-medium"
                         style={{
                           backgroundColor: "oklch(60% 0.18 232 / 0.15)",
-                          color: "oklch(50% 0.18 232)",
+                          //color: "oklch(50% 0.18 232)",
                         }}
                       >
                         {ps.skills?.name}
@@ -155,7 +154,7 @@ export default function ProjectsPage() {
                       <Link
                         href={project.live_url}
                         target="_blank"
-                        className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors hover:opacity-80"
+                        className="inline-flex items-center gap-1.5 text-sm font-medium px-4 py-1.5 rounded-full border border-blue-500 transition-colors hover:opacity-80"
                         style={{ color: "oklch(60% 0.18 232)" }}
                       >
                         <ExternalLink className="h-3.5 w-3.5" />
@@ -166,7 +165,7 @@ export default function ProjectsPage() {
                       <Link
                         href={project.github_url}
                         target="_blank"
-                        className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                        className="inline-flex items-center gap-1.5 text-sm text-muted-foreground px-4 py-1.5 rounded-full border border-blue-500 hover:text-foreground transition-colors"
                       >
                         <FaGithub className="h-3.5 w-3.5" />
                         Github Repository

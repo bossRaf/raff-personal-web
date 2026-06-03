@@ -119,7 +119,7 @@ export function TestimonialModal({ isOpen, onClose }: TestimonialModalProps) {
 
         {/* Header */}
         <div className="mb-6">
-          <h2 className="text-xl font-bold text-foreground">
+          <h2 className="text-xl font-bold text-blue-600">
             Leave a Testimonial
           </h2>
           <p className="text-sm text-muted-foreground mt-1">
@@ -135,14 +135,14 @@ export function TestimonialModal({ isOpen, onClose }: TestimonialModalProps) {
             >
               ✓
             </div>
-            <h3 className="font-bold text-foreground text-lg">Thank you!</h3>
+            <h3 className="font-bold text-blue-600 text-lg">Thank you!</h3>
             <p className="text-sm text-muted-foreground">
               Your testimonial has been submitted and is pending review.
             </p>
             <button
               onClick={onClose}
-              className="mt-4 px-5 py-2 rounded-xl text-sm font-medium text-white"
-              style={{ background: "oklch(60% 0.18 232)" }}
+              className="mt-4 px-5 py-2 rounded-xl text-sm font-medium text-blue-600"
+              style={{ background: "oklch(60% 0.18 232 / 0.15)" }}
             >
               Close
             </button>
@@ -165,7 +165,7 @@ export function TestimonialModal({ isOpen, onClose }: TestimonialModalProps) {
 
             {/* Rating */}
             <div className="space-y-1">
-              <label className="text-sm font-medium text-foreground">
+              <label className="text-sm font-medium text-blue-600">
                 Rating
               </label>
               <div className="flex items-center gap-1">
@@ -197,9 +197,7 @@ export function TestimonialModal({ isOpen, onClose }: TestimonialModalProps) {
 
             {/* Name */}
             <div className="space-y-1">
-              <label className="text-sm font-medium text-foreground">
-                Name
-              </label>
+              <label className="text-sm font-medium text-blue-600">Name</label>
               <input
                 type="text"
                 value={name}
@@ -213,9 +211,7 @@ export function TestimonialModal({ isOpen, onClose }: TestimonialModalProps) {
 
             {/* Role */}
             <div className="space-y-1">
-              <label className="text-sm font-medium text-foreground">
-                Role
-              </label>
+              <label className="text-sm font-medium text-blue-600">Role</label>
               <input
                 type="text"
                 value={role}
@@ -229,7 +225,7 @@ export function TestimonialModal({ isOpen, onClose }: TestimonialModalProps) {
 
             {/* Company */}
             <div className="space-y-1">
-              <label className="text-sm font-medium text-foreground">
+              <label className="text-sm font-medium text-blue-600">
                 Company{" "}
                 <span className="text-muted-foreground">(optional)</span>
               </label>
@@ -245,9 +241,7 @@ export function TestimonialModal({ isOpen, onClose }: TestimonialModalProps) {
 
             {/* Photo */}
             <div className="space-y-1">
-              <label className="text-sm font-medium text-foreground">
-                Photo
-              </label>
+              <label className="text-sm font-medium text-blue-600">Photo</label>
               <input
                 type="file"
                 accept="image/*"
@@ -259,7 +253,7 @@ export function TestimonialModal({ isOpen, onClose }: TestimonialModalProps) {
 
             {/* Message */}
             <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">
+              <label className="text-sm font-medium text-blue-600">
                 Message
               </label>
               <textarea
@@ -277,8 +271,8 @@ export function TestimonialModal({ isOpen, onClose }: TestimonialModalProps) {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-2.5 rounded-xl text-sm font-medium text-white transition-all disabled:opacity-50"
-              style={{ background: "oklch(60% 0.18 232)" }}
+              className="w-full py-2.5 rounded-xl text-sm font-bold border border-blue-600 text-blue-600 transition-all disabled:opacity-50"
+              style={{ background: "oklch(60% 0.18 232 / 0.15)" }}
             >
               {loading ? "Submitting..." : "Submit Testimonial"}
             </button>

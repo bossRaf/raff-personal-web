@@ -56,16 +56,15 @@ export default function TestimonialsPage() {
             {testimonials.map((t) => (
               <div
                 key={t.id}
-                className="rounded-2xl border-2 p-6 flex flex-col h-80 transition-all hover:-translate-y-1"
+                className="rounded-2xl border-2 border-blue-500 p-6 flex flex-col h-70 transition-all hover:-translate-y-1"
                 style={{
                   backgroundColor: "var(--card)",
-                  borderColor: "var(--border)",
                 }}
                 onMouseEnter={(e) =>
                   (e.currentTarget.style.borderColor = "oklch(60% 0.18 232)")
                 }
                 onMouseLeave={(e) =>
-                  (e.currentTarget.style.borderColor = "var(--border)")
+                  (e.currentTarget.style.borderColor = "oklch(60% 0.18 232)")
                 }
               >
                 {/* Stars */}
@@ -86,7 +85,7 @@ export default function TestimonialsPage() {
 
                 {/* Message */}
                 <p className="flex-1 text-sm text-muted-foreground leading-relaxed italic overflow-hidden">
-                  "{t.message}"
+                  {t.message}
                 </p>
 
                 {/* Author */}
@@ -142,7 +141,7 @@ export default function TestimonialsPage() {
           </p>
           <button
             onClick={() => setModalOpen(true)}
-            className="inline-flex items-center gap-2 px-5 py-2 rounded-xl text-xl font-bold text-blue-500 border-2 transition-all hover:-translate-y-0.5"
+            className="inline-flex items-center gap-2 px-5 py-2 rounded-xl text-xl font-bold text-blue-500 border-2 border-blue-500 transition-all hover:-translate-y-0.5"
             style={{ background: "oklch(60% 0.18 232 / 0.15)" }}
           >
             Leave a Testimonial

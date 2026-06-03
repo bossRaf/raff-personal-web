@@ -83,16 +83,16 @@ export default function HomePage() {
             <div className="flex flex-wrap items-center gap-3">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold text-blue-500 border transition-all hover:-translate-y-0.5"
-                style={{ background: "oklch(60% 0.18 232 / 0.15)" }}
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold text-blue-700 border border-blue-600 transition-all hover:-translate-y-0.5"
+                style={{ background: "oklch(91.7% 0.08 205.041)" }}
+                //style={{ background: "oklch(60% 0.18 232 / 0.15)" }}
               >
                 {hero?.cta || "Hire Me"}
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 href="/projects"
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold border-2 transition-all hover:-translate-y-0.5 text-blue-500"
-                style={{ borderColor: "oklch(60% 0.18 232 / 0.15)" }}
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm border border-blue-700 transition-all hover:-translate-y-0.5 text-blue-500"
               >
                 View Projects
                 <ExternalLink className="h-4 w-4" />
