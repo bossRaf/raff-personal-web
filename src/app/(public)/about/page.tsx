@@ -166,19 +166,19 @@ export default function AboutPage() {
             {/* Availability badge */}
             <div className="mb-12">
               <div
-                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-sm"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-full border text-sm"
                 style={{
                   borderColor: "oklch(74.6% 0.16 232.661)",
                   color: "oklch(50% 0.18 232)",
                 }}
               >
-                <span className="relative flex h-2 w-2">
+                <span className="relative flex h-4 w-4">
                   <span
                     className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
                     style={{ backgroundColor: "#00ffd5" }}
                   />
                   <span
-                    className="relative inline-flex rounded-full h-2 w-2"
+                    className="relative inline-flex rounded-full h-4 w-4"
                     style={{ backgroundColor: "#00ffd5" }}
                   />
                 </span>

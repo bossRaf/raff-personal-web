@@ -50,7 +50,7 @@ export function Footer() {
 
             {/* Navigation */}
             <div className="space-y-3">
-              <h4 className="font-medium text-sm">Navigation</h4>
+              <h4 className="font-bold text-sm text-blue-600">Navigation</h4>
               <ul className="space-y-2">
                 {[
                   "Home",
@@ -74,7 +74,7 @@ export function Footer() {
 
             {/* Connect */}
             <div className="space-y-3">
-              <h4 className="font-medium text-sm">Connect</h4>
+              <h4 className="font-bold text-sm text-blue-600">Connect</h4>
               <ul className="space-y-2">
                 <li>
                   <Link
@@ -87,7 +87,7 @@ export function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="https://linkedin.com"
+                    href="https://www.linkedin.com/in/raffy-maluya-47090a328"
                     target="_blank"
                     className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                   >
@@ -99,7 +99,7 @@ export function Footer() {
 
             {/* More */}
             <div className="space-y-3">
-              <h4 className="font-medium text-sm">More</h4>
+              <h4 className="font-bold text-sm text-blue-600">More</h4>
               <ul className="space-y-2">
                 <li>
                   <Link

@@ -157,12 +157,12 @@ export default function ContactPage() {
               {success ? (
                 <div className="text-center py-10 space-y-3">
                   <div
-                    className="w-14 h-14 rounded-full flex items-center justify-center mx-auto text-2xl"
+                    className="w-14 h-14 rounded-full flex items-center justify-center mx-auto text-2xl text-blue-600"
                     style={{ backgroundColor: "oklch(60% 0.18 232 / 0.15)" }}
                   >
                     ✓
                   </div>
-                  <h3 className="font-bold text-white text-lg">
+                  <h3 className="font-bold text-blue-600 text-lg">
                     Message sent!
                   </h3>
                   <p

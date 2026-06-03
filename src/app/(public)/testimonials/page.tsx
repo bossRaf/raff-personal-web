@@ -115,7 +115,7 @@ export default function TestimonialsPage() {
                   </div>
 
                   <div>
-                    <p className="text-sm font-semibold text-foreground">
+                    <p className="text-lg font-semibold text-blue-500">
                       {t.name}
                     </p>
                     <p className="text-xs text-muted-foreground">
