@@ -49,7 +49,7 @@ export function Header() {
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
         {/* Left — Logo + Hamburger */}
         <div className="flex items-center gap-2" ref={menuRef}>
-          <Link href="/" className="font-bold text-lg">
+          <Link href="/" className="hidden lg:block font-bold text-lg">
             <span style={{ color: "oklch(60% 0.18 232)" }}>raff</span>
             <span className="text-foreground">Simplified</span>
           </Link>

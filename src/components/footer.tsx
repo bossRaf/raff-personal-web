@@ -57,7 +57,7 @@ export function Footer() {
                   "About",
                   "Skills",
                   "Projects",
-                  "Testimonials",
+                  "Feed Back",
                   "Contact",
                 ].map((item) => (
                   <li key={item}>
