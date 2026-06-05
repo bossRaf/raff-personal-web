@@ -115,7 +115,7 @@ export default function ProjectsPage() {
                   )}
                   {project.featured && (
                     <span
-                      className="absolute top-3 right-3 px-2 py-0.5 rounded-full text-xs font-bold text-blue-500 border"
+                      className="absolute top-3 right-3 px-2 py-0.5 rounded-full text-xs font-bold text-yellow-500 border"
                       style={{ backgroundColor: "oklch(60% 0.18 232 / 0.15)" }}
                     >
                       Featured

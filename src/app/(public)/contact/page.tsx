@@ -111,7 +111,7 @@ export default function ContactPage() {
                     style={{ color: "oklch(60% 0.18 232)" }}
                   />
                 </div>
-                <span>Masbate, Philippines</span>
+                <span>Masbate City, Philippines</span>
               </div>
 
               <div className="flex items-center gap-3 text-sm text-muted-foreground">

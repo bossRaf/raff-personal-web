@@ -113,7 +113,7 @@ export default function AboutPage() {
                 <div className="space-y-2 border-t pt-3">
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <MapPin className="h-4 w-4 shrink-0" />
-                    <span>{about?.location || "Masbate, PH"}</span>
+                    <span>{about?.location || "Masbate City"}</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <Clock className="h-4 w-4 shrink-0" />
