@@ -31,6 +31,14 @@ export const metadata: Metadata = {
     url: "https://raffsimplified.vercel.app",
     siteName: "Raff Simplified",
     type: "website",
+    images: [
+      {
+        url: "/og",
+        width: 1200,
+        height: 630,
+        alt: "Raffy Maluya | Full-Stack Developer",
+      },
+    ],
   },
 
   twitter: {
@@ -38,6 +46,7 @@ export const metadata: Metadata = {
     title: "Raffy Maluya | Full-Stack Developer",
     description:
       "Full-Stack Developer specializing in Next.js, TypeScript, Supabase, PostgreSQL, and scalable production-ready web applications.",
+    images: ["/og"],
   },
 };
 
