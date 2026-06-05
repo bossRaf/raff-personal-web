@@ -203,7 +203,7 @@ export function TestimonialModal({ isOpen, onClose }: TestimonialModalProps) {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
-                placeholder="John Doe"
+                placeholder="Enter your name"
                 className={inputClass}
                 style={inputStyle}
               />

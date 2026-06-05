@@ -216,7 +216,7 @@ export default function ContactPage() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
-                      placeholder="you@example.com"
+                      placeholder="Enter your email"
                       className={inputClass}
                       style={{
                         backgroundColor: "oklch(20% 0.02 232)",
