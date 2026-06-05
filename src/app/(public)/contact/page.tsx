@@ -37,11 +37,7 @@ export default function ContactPage() {
   };
 
   const inputClass =
-    "w-full px-3 py-2 rounded-lg border text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 transition-all";
-  const inputStyle = {
-    backgroundColor: "var(--background)",
-    borderColor: "var(--border)",
-  };
+    "w-full px-3 py-2 rounded-lg border border-blue-500 focus:border-blue-500 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 transition-all";
 
   return (
     <section className="min-h-[calc(100vh-4rem)] px-4 py-16">
@@ -220,7 +216,6 @@ export default function ContactPage() {
                       className={inputClass}
                       style={{
                         backgroundColor: "oklch(20% 0.02 232)",
-                        borderColor: "oklch(30% 0.05 232)",
                         color: "oklch(85% 0.02 232)",
                       }}
                     />
@@ -239,7 +234,6 @@ export default function ContactPage() {
                       className={inputClass}
                       style={{
                         backgroundColor: "oklch(20% 0.02 232)",
-                        borderColor: "oklch(30% 0.05 232)",
                         color: "oklch(85% 0.02 232)",
                       }}
                     />

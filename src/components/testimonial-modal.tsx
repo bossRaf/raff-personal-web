@@ -57,10 +57,9 @@ export function TestimonialModal({ isOpen, onClose }: TestimonialModalProps) {
   };
 
   const inputClass =
-    "w-full px-3 py-2 rounded-lg border text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 transition-all";
+    "w-full px-3 py-2 rounded-lg border border-blue-500 focus:border-blue-500 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 transition-all";
   const inputStyle = {
     backgroundColor: "var(--background)",
-    borderColor: "var(--border)",
   };
 
   async function uploadImage(event: React.ChangeEvent<HTMLInputElement>) {
@@ -179,6 +178,7 @@ export function TestimonialModal({ isOpen, onClose }: TestimonialModalProps) {
                   >
                     <Star
                       className="h-6 w-6 transition-colors"
+                      stroke="oklch(62.3% 0.214 259.815)"
                       style={{
                         fill:
                           i < (hoveredRating || rating)
@@ -186,7 +186,7 @@ export function TestimonialModal({ isOpen, onClose }: TestimonialModalProps) {
                             : "transparent",
                         color:
                           i < (hoveredRating || rating)
-                            ? "oklch(80% 0.18 85)"
+                            ? "oklch(62.3% 0.214 259.815)"
                             : "var(--border)",
                       }}
                     />
