@@ -16,6 +16,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://raffsimplified.vercel.app"),
 
+  verification: {
+    google: "KeYvUabbzuMS7FurCtX1B4wbopW_M29rWPG-RimYpmw",
+  },
+
   title: {
     default: "Raffy Maluya | Full-Stack Developer",
     template: "%s | Raff Simplified",
