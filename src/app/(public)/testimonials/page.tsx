@@ -56,7 +56,7 @@ export default function TestimonialsPage() {
             {testimonials.map((t) => (
               <div
                 key={t.id}
-                className="rounded-2xl border-2 border-blue-500 p-6 flex flex-col h-70 transition-all hover:-translate-y-1"
+                className="rounded-2xl border-2 border-blue-500 p-6 flex flex-col h-80 transition-all hover:-translate-y-1"
                 style={{
                   backgroundColor: "var(--card)",
                 }}
