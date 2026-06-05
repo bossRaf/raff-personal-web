@@ -94,7 +94,7 @@ export default function TestimonialsPage() {
                   style={{ borderColor: "var(--border)" }}
                 >
                   <div
-                    className="w-9 h-9 rounded-full overflow-hidden shrink-0"
+                    className="w-12 h-12 rounded-full overflow-hidden border border-blue-500 shrink-0"
                     style={{ backgroundColor: "oklch(60% 0.18 232)" }}
                   >
                     {t.image ? (
