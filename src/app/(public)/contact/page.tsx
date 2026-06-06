@@ -50,7 +50,7 @@ export default function ContactPage() {
                 Let's build something amazing together
               </h2>
               <p className="text-muted-foreground leading-relaxed">
-                I'm currently available for freelance, collaboraion and
+                I'm currently available for freelance, collaboration and
                 full-time opportunities. Whether you have a project in mind or
                 just want to say hello, my inbox is always open.
               </p>
