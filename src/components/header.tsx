@@ -49,6 +49,13 @@ export function Header() {
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
         {/* Left — Logo + Hamburger */}
         <div className="flex items-center gap-2" ref={menuRef}>
+          <img
+            src="/brandLogo.png"
+            alt="Raff Simplified Logo"
+            width={35}
+            height={35}
+            style={{ borderRadius: "8px" }}
+          />
           <Link href="/" className="hidden lg:block font-bold text-lg">
             <span style={{ color: "oklch(60% 0.18 232)" }}>raff</span>
             <span className="text-foreground">Simplified</span>
