@@ -57,7 +57,8 @@ export function TestimonialModal({ isOpen, onClose }: TestimonialModalProps) {
   };
 
   const inputClass =
-    "w-full px-3 py-2 rounded-lg border border-blue-500 focus:border-blue-500 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 transition-all";
+    "w-full px-3 py-2 rounded-lg border border-blue-500 focus:border-blue-500 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 transition-all file:rounded-full file:border border-blue-500 file:px-2 file:py-2 file:text-sm file:font-semibold file:text-blue-500";
+
   const inputStyle = {
     backgroundColor: "var(--background)",
   };
@@ -239,6 +240,23 @@ export function TestimonialModal({ isOpen, onClose }: TestimonialModalProps) {
               />
             </div>
 
+            {/* Message   " class=" */}
+            <div className="space-y-2">
+              {/* <label className="text-sm font-medium text-blue-600">
+                Message
+              </label> */}
+              <CharacterCounter current={message.length} max={MAX_CHARS} />
+              <textarea
+                value={message}
+                onChange={(e) => setMessage(e.target.value.slice(0, MAX_CHARS))}
+                required
+                rows={4}
+                placeholder="Share your experience working with me..."
+                className={inputClass}
+                style={inputStyle}
+              />
+            </div>
+
             {/* Photo */}
             <div className="space-y-1">
               <label className="text-sm font-medium text-blue-600">
@@ -251,23 +269,6 @@ export function TestimonialModal({ isOpen, onClose }: TestimonialModalProps) {
                 className={inputClass}
                 style={inputStyle}
               />
-            </div>
-
-            {/* Message */}
-            <div className="space-y-2">
-              {/* <label className="text-sm font-medium text-blue-600">
-                Message
-              </label> */}
-              <textarea
-                value={message}
-                onChange={(e) => setMessage(e.target.value.slice(0, MAX_CHARS))}
-                required
-                rows={4}
-                placeholder="Share your experience working with me..."
-                className={inputClass}
-                style={inputStyle}
-              />
-              <CharacterCounter current={message.length} max={MAX_CHARS} />
             </div>
 
             <button
