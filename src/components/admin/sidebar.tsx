@@ -172,55 +172,26 @@ export function AdminSidebar() {
     <>
       {/* Desktop sidebar */}
       <aside
-        className="hidden md:flex w-64 shrink-0 h-screen sticky top-0 flex-col border-r"
+        className="hidden md:flex w-60 shrink-0 h-screen sticky top-0 flex-col border-r"
         style={{ backgroundColor: "var(--card)" }}
       >
         <SidebarContent {...sharedProps} />
       </aside>
 
       {/* Mobile top bar */}
-      {/* <div
-        className="md:hidden fixed top-0 left-0 right-0 z-50 h-14 flex items-center justify-between px-4 border-b"
-        style={{ backgroundColor: "var(--card)" }}
-      >
-        <Link href="/admin" className="font-bold text-lg tracking-tight">
-          <span style={{ color: "oklch(60% 0.18 232)" }}>raff</span>
-          <span className="text-foreground">Simplified</span>
-        </Link>
-
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() =>
-              setTheme(resolvedTheme === "dark" ? "light" : "dark")
-            }
-            className="p-1.5 rounded-lg hover:bg-accent transition-colors"
-          >
-            {mounted && resolvedTheme === "dark" ? (
-              <Sun className="h-5 w-5 text-foreground" />
-            ) : (
-              <Moon className="h-5 w-5 text-foreground" />
-            )}
-          </button>
-          <button
-            onClick={() => setMobileOpen((o) => !o)}
-            className="p-1.5 rounded-lg hover:bg-accent transition-colors"
-          >
-            {mobileOpen ? (
-              <X className="h-5 w-5 text-foreground" />
-            ) : (
-              <Menu className="h-5 w-5 text-foreground" />
-            )}
-          </button>
-        </div>
-      </div> */}
       <div
         className="md:hidden fixed top-0 left-0 right-0 z-50 h-14 flex items-center justify-between px-4 border-b"
         style={{ backgroundColor: "var(--card)" }}
       >
         <div className="flex items-center gap-3">
           <Link href="/admin" className="font-bold text-lg tracking-tight">
-            <span style={{ color: "oklch(60% 0.18 232)" }}>raff</span>
-            <span className="text-foreground">Simplified</span>
+            <img
+              src="/brandLogo.png"
+              alt="Raff Simplified Logo"
+              width={35}
+              height={35}
+              style={{ borderRadius: "8px" }}
+            />
           </Link>
           <button
             onClick={() =>
