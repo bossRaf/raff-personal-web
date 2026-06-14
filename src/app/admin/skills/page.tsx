@@ -336,9 +336,9 @@ export default function AdminSkillsPage() {
                                 </span>
                               </div>
                             </td>
-                            <td className="px-6 py-3 text-muted-foreground text-xs">
+                            {/* <td className="px-6 py-3 text-muted-foreground text-xs">
                               Order: {skill.display_order}
-                            </td>
+                            </td> */}
                             <td className="px-6 py-3">
                               <div className="flex items-center justify-end gap-2">
                                 <button
