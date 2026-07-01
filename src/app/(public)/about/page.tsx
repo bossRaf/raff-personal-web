@@ -129,7 +129,6 @@ export default function AboutPage() {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-xm font-bold text-blue-800 border border-blue-600 transition-all hover:-translate-y-0.5"
                     style={{ background: "oklch(91.7% 0.08 205.041)" }}
-                    // oklch(91.7% 0.08 205.041)   60% 0.18 232 / 0.15
                   >
                     <Download className="h-4 w-4" />
                     Resume
@@ -137,7 +136,8 @@ export default function AboutPage() {
 
                   <a
                     href="/contact"
-                    className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm border border-blue-600 transition-all hover:-translate-y-0.5 text-blue-500"
+                    className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm border border-blue-600 transition-all hover:-translate-y-0.5 text-muted-foreground"
+                    style={{ background: "oklch(60% 0.18 232 / 0.15)" }}
                   >
                     <Mail className="h-4 w-4" />
                     Message

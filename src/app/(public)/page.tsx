@@ -92,7 +92,8 @@ export default function HomePage() {
               </Link>
               <Link
                 href="/projects"
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm border border-blue-700 transition-all hover:-translate-y-0.5 text-blue-500"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm border border-blue-700 transition-all hover:-translate-y-0.5 text-muted-foreground"
+                style={{ background: "oklch(60% 0.18 232 / 0.15)" }}
               >
                 View Projects
                 <ExternalLink className="h-4 w-4" />

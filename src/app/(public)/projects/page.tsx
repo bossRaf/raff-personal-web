@@ -140,7 +140,6 @@ export default function ProjectsPage() {
                         className="px-2 py-0.5 rounded-md text-xs text-blue-500 font-medium"
                         style={{
                           backgroundColor: "oklch(60% 0.18 232 / 0.15)",
-                          //color: "oklch(50% 0.18 232)",
                         }}
                       >
                         {ps.skills?.name}
@@ -154,8 +153,8 @@ export default function ProjectsPage() {
                       <Link
                         href={project.live_url}
                         target="_blank"
-                        className="inline-flex items-center gap-1.5 text-sm font-medium px-4 py-1.5 rounded-full border border-blue-500 transition-colors hover:opacity-80"
-                        style={{ color: "oklch(60% 0.18 232)" }}
+                        className="inline-flex items-center gap-1.5 text-sm font-medium px-4 py-1.5 rounded-full border text-blue-800 border-blue-500 transition-colors hover:opacity-80"
+                        style={{ background: "oklch(91.7% 0.08 205.041)" }}
                       >
                         <ExternalLink className="h-3.5 w-3.5" />
                         Live Demo
@@ -165,7 +164,8 @@ export default function ProjectsPage() {
                       <Link
                         href={project.github_url}
                         target="_blank"
-                        className="inline-flex items-center gap-1.5 text-sm text-muted-foreground px-4 py-1.5 rounded-full border border-blue-500 hover:text-foreground transition-colors"
+                        className="inline-flex items-center gap-1.5 text-sm px-4 py-1.5 rounded-full border text-muted-foreground border-blue-500 hover:text-foreground transition-colors"
+                        style={{ background: "oklch(60% 0.18 232 / 0.15)" }}
                       >
                         <FaGithub className="h-3.5 w-3.5" />
                         Github Repository
