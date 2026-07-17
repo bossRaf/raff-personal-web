@@ -28,6 +28,10 @@ export const metadata: Metadata = {
   description:
     "Full-Stack Developer specializing in Next.js, TypeScript, Supabase, PostgreSQL, and scalable production-ready web applications.",
 
+  icons: {
+    icon: "/brandLogo.png",
+  },
+
   openGraph: {
     title: "Raffy Maluya | Full-Stack Developer",
     description:
